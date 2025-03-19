@@ -1,0 +1,7 @@
+# Pliki systemowe macOS
+.DS_Store
+
+# Maven
+target/
+*.jar
+*.war
