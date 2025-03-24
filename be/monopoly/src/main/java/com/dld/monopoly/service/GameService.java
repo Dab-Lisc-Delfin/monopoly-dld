@@ -1,8 +1,12 @@
 package com.dld.monopoly.service;
 
+import com.dld.monopoly.model.Board;
+import com.dld.monopoly.model.fields.*;
 import com.dld.monopoly.model.GameManager;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 @Service
