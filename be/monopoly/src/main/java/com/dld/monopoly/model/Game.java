@@ -1,14 +1,20 @@
 package com.dld.monopoly.model;
 
-import java.util.List;
-import java.util.UUID;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.util.List;
+@Getter
+@Setter
 public class Game {
-    public Game(String gameId) {
+    public Game(String gameId, Board board) {
         this.gameId = gameId;
+        this.board = board;
     }
+
     private final String gameId;
     private List<Player> players;
     private Board board;
     private int currentPlayerIndex = 0;
+
 }

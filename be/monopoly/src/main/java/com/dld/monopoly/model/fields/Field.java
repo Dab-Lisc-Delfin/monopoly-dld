@@ -12,8 +12,5 @@ public abstract class Field {
     private int id;
     private String name;
     private FieldType fieldType;
-//    private String color;
-//    private int price;
-//    private boolean isAvailable;
-//    private Player owner;
+
 }

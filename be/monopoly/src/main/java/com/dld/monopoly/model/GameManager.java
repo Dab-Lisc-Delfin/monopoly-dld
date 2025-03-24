@@ -1,11 +1,21 @@
 package com.dld.monopoly.model;
 
+import lombok.Getter;
 import org.springframework.stereotype.Component;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
+@Getter
 public class GameManager {
-    private final Map<String, Game> activeGames = new ConcurrentHashMap<>();
+    private List<Game> activeGames = new ArrayList<>();
+
+    public void addGame(Game game) {
+        activeGames.add(game);
+    }
+
+    public List<Game> getActiveGames() {
+        return activeGames;
+    }
 }
