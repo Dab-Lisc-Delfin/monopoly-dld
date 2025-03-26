@@ -9,6 +9,7 @@ import java.util.List;
 @Component
 @Getter
 public class GameManager {
+
     private List<Game> activeGames = new ArrayList<>();
 
     public void addGame(Game game) {

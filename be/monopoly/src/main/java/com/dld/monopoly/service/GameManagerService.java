@@ -27,7 +27,7 @@ public class GameManagerService {
     }
 
 
-    public Game getGameById(String gameId) {
+    protected Game getGameById(String gameId) {
         List<Game> games = gameManager.getActiveGames();
 
         for (Game game : games) {
@@ -89,4 +89,7 @@ public class GameManagerService {
 
         return new Board(boardField);
     }
+
+
+
 }
