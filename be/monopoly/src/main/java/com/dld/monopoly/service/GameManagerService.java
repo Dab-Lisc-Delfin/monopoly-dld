@@ -21,13 +21,14 @@ public class GameManagerService {
     public Game createNewGame() {
         String randomId = UUID.randomUUID().toString().substring(0, 5);
         Game game = new Game(randomId, initializeBoard());
+        game.setPlayers(new ArrayList<>());
         gameManager.addGame(game);
         System.out.println("GAMEEE ID " + game.getGameId());
         return game;
     }
 
 
-    public Game getGameById(String gameId) {
+    protected Game getGameById(String gameId) {
         List<Game> games = gameManager.getActiveGames();
 
         for (Game game : games) {
@@ -39,7 +40,8 @@ public class GameManagerService {
         return null; //todo
     }
 
-    private Board initializeBoard() {
+
+    protected Board initializeBoard() {
         List<Field> boardField = new ArrayList<>();
 
         boardField.add(new NonPropertyField(1, "START", FieldType.START));
@@ -89,4 +91,7 @@ public class GameManagerService {
 
         return new Board(boardField);
     }
+
+
+
 }
