@@ -39,7 +39,7 @@ public class GameManagerService {
         return null; //todo
     }
 
-    private Board initializeBoard() {
+    protected Board initializeBoard() {
         List<Field> boardField = new ArrayList<>();
 
         boardField.add(new NonPropertyField(1, "START", FieldType.START));
