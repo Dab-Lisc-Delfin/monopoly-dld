@@ -21,6 +21,7 @@ public class GameManagerService {
     public Game createNewGame() {
         String randomId = UUID.randomUUID().toString().substring(0, 5);
         Game game = new Game(randomId, initializeBoard());
+        game.setPlayers(new ArrayList<>());
         gameManager.addGame(game);
         System.out.println("GAMEEE ID " + game.getGameId());
         return game;
@@ -38,6 +39,7 @@ public class GameManagerService {
 
         return null; //todo
     }
+
 
     protected Board initializeBoard() {
         List<Field> boardField = new ArrayList<>();

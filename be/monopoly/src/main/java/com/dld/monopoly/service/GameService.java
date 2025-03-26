@@ -31,6 +31,15 @@ public class GameService {
         return dices;
     }
 
+    //todo tests
+    public void updateGame(Game updatedGame) {
+        for (int i = 0; i < gameManager.getActiveGames().size(); i++) {
+            if (gameManager.getActiveGames().get(i).getGameId().equals(updatedGame.getGameId())) {
+                gameManager.getActiveGames().set(i, updatedGame);
+            }
+        }
+    }
+
 
     public Field findFieldById(Game game, int fieldId) {
         return game.getBoard().getFields().stream()
@@ -48,19 +57,22 @@ public class GameService {
 
     public Player addPlayerToGame(String gameId, String playerNick) {
         Game game = gameManagerService.getGameById(gameId);
-
         Player player = new Player();
+
         if (game.getPlayers().size() < 6) {
             player.setPlayerIndex(game.getPlayers().size() + 1);
+            player.setNickname(playerNick);
             player.setDices(null);
             player.setMoney(1500);
-//            player.setCurrentFiled();
+            Field field = findFieldById(game, 1);
+            player.setPosition(field);
 
+            game.getPlayers().add(player);
+            updateGame(game);
         } else {
             throw new RuntimeException("lobby is full");
         }
 
-
-        return null;
+        return player;
     }
 }

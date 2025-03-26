@@ -2,6 +2,7 @@ package com.dld.monopoly.service;
 
 import com.dld.monopoly.model.Game;
 import com.dld.monopoly.model.GameManager;
+import com.dld.monopoly.model.Player;
 import com.dld.monopoly.model.fields.Field;
 import com.dld.monopoly.model.fields.FieldType;
 import org.junit.jupiter.api.BeforeAll;
@@ -60,5 +61,17 @@ class GameServiceTest {
         assertEquals(field.getId(), 40);
         assertEquals(field.getFieldType(), FieldType.PROPERTY);
         assertEquals(field.getName(), "BOARDWALK");
+    }
+
+
+    @Test
+    void addPlayerToGame_whenAddingPlayerToExistingNotStartedGame_shouldReturnCorrect() {
+        gameService.addPlayerToGame(game.getGameId(), "testNick");
+        Player player1 = game.getPlayers().get(0);
+
+        assertEquals(player1.getPlayerIndex(),1);
+        assertEquals(player1.getNickname(),"testNick");
+        assertEquals(player1.getPosition().getFieldType(), FieldType.START);
+        assertEquals(player1.getMoney(),1500);
     }
 }
