@@ -13,7 +13,7 @@ public class Player {
         this.money = 1500;
         this.allDiceRollsInThisTour = 0;
         this.doubletCounter = 0;
-        this.inJail = false;
+        this.isInJail = false;
     }
 
     private String nickname;
@@ -23,5 +23,5 @@ public class Player {
     private int allDiceRollsInThisTour;
     private int doubletCounter;
     private Field position;
-    private boolean inJail;
+    private boolean isInJail;
 }

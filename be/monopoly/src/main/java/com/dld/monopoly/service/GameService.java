@@ -4,6 +4,7 @@ import com.dld.monopoly.model.Game;
 import com.dld.monopoly.model.GameManager;
 import com.dld.monopoly.model.Player;
 import com.dld.monopoly.model.fields.Field;
+import com.dld.monopoly.model.fields.FieldType;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -102,7 +103,14 @@ public class GameService {
             newPositionId = (currentPosition + moveLength) - 40;
             Field field = findFieldById(game, newPositionId);
 
-            player.setPosition(field);
+
+            switch (field.getFieldType()) {
+                case FieldType.PROPERTY ->  sendToJail(game,player); // todo +add rest types and create methods
+                case FieldType.GO_TO_JAIL -> sendToJail(game, player);
+            }
+
+
+                player.setPosition(field);
 
 
         } else {
@@ -123,7 +131,8 @@ public class GameService {
     private void sendToJail(Game game, Player player) {
         Field jail = findFieldByName(game, "JAIL");
 
-
+        player.setPosition(jail);
+        player.setInJail(true);
     }
 
 
