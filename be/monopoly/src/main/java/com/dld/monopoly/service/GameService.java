@@ -74,17 +74,19 @@ public class GameService {
     }
 
 
-    public Optional<Field> findFieldById(Game game, int fieldId) {
+    public Field findFieldById(Game game, int fieldId) {
         return game.getBoard().getFields().stream()
                 .filter(field -> field.getId() == fieldId)
-                .findFirst();
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Field " + fieldId + " doesn't exist"));
     }
 
 
-    public Optional<Field> findFieldByName(Game game, String fieldName) {
+    public Field findFieldByName(Game game, String fieldName) {
         return game.getBoard().getFields().stream()
-                .filter(field -> field.getName() == fieldName)
-                .findFirst();
+                .filter(field -> field.getName().equals(fieldName))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Field " + fieldName + " doesn't exist"));
     }
 
 
@@ -98,16 +100,14 @@ public class GameService {
 
         if (currentPosition + moveLength > 40) {
             newPositionId = (currentPosition + moveLength) - 40;
-            Field field = findFieldById(game, newPositionId)
-                    .orElseThrow(() -> new IllegalArgumentException("Field doesn't exist"));
+            Field field = findFieldById(game, newPositionId);
 
             player.setPosition(field);
 
 
         } else {
             newPositionId = currentPosition + moveLength;
-            Field field = findFieldById(game, newPositionId)
-                    .orElseThrow(() -> new IllegalArgumentException("Field doesn't exist"));
+            Field field = findFieldById(game, newPositionId);
 
             player.setPosition(field);
         }
@@ -120,6 +120,13 @@ public class GameService {
     }
 
 
+    private void sendToJail(Game game, Player player) {
+        Field jail = findFieldByName(game, "JAIL");
+
+
+    }
+
+
     public Player addPlayerToGame(String gameId, String playerNick) {
         Game game = gameManagerService.getGameById(gameId);
         Player player = new Player();
@@ -128,8 +135,7 @@ public class GameService {
         if (game.getPlayers().size() < 6) {
             player.setPlayerIndex(game.getPlayers().size() + 1);
             player.setNickname(playerNick);
-            Field field = findFieldById(game, 1)
-                    .orElseThrow(() -> new IllegalArgumentException("Field doesn't exist"));
+            Field field = findFieldById(game, 1);
             player.setPosition(field);
 
             game.getPlayers().add(player);

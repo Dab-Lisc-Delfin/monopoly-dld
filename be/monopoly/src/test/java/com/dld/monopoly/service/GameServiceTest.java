@@ -36,15 +36,13 @@ class GameServiceTest {
 
     @Test
     void findFieldById_whenSearchingPropertyFields_shouldReturnCorrect() {
-        Field field = gameService.findFieldById(game, 11)
-                .orElseThrow(() -> new IllegalArgumentException("Field doesn't exist")); //id:11 - jail
+        Field field = gameService.findFieldById(game, 11);
         assertEquals(field.getId(), 11);
         assertEquals(field.getFieldType(), FieldType.JAIL);
         assertEquals(field.getName(), "JAIL");
 
 
-        field = gameService.findFieldById(game, 40)
-                .orElseThrow(() -> new IllegalArgumentException("Field doesn't exist")); //id:40 - last field
+        field = gameService.findFieldById(game, 40);
         assertEquals(field.getId(), 40);
         assertEquals(field.getFieldType(), FieldType.PROPERTY);
         assertEquals(field.getName(), "BOARDWALK");
@@ -53,16 +51,14 @@ class GameServiceTest {
 
     @Test
     void findFieldByName_whenSearchingPropertyFields_shouldReturnCorrect() {
-        Field field = gameService.findFieldByName(game, "JAIL")
-                .orElseThrow(() -> new IllegalArgumentException("Field doesn't exist")); //id:11 - jail
+        Field field = gameService.findFieldByName(game, "JAIL");
 
         assertEquals(field.getId(), 11);
         assertEquals(field.getFieldType(), FieldType.JAIL);
         assertEquals(field.getName(), "JAIL");
 
 
-        field = gameService.findFieldByName(game, "BOARDWALK")
-                .orElseThrow(() -> new IllegalArgumentException("Field doesn't exist")); //id:40 - last field
+        field = gameService.findFieldByName(game, "BOARDWALK");
         assertEquals(field.getId(), 40);
         assertEquals(field.getFieldType(), FieldType.PROPERTY);
         assertEquals(field.getName(), "BOARDWALK");
