@@ -36,13 +36,15 @@ class GameServiceTest {
 
     @Test
     void findFieldById_whenSearchingPropertyFields_shouldReturnCorrect() {
-        Field field = gameService.findFieldById(game, 11); //id:11 - jail
+        Field field = gameService.findFieldById(game, 11)
+                .orElseThrow(() -> new IllegalArgumentException("Field doesn't exist")); //id:11 - jail
         assertEquals(field.getId(), 11);
         assertEquals(field.getFieldType(), FieldType.JAIL);
         assertEquals(field.getName(), "JAIL");
 
 
-        field = gameService.findFieldById(game, 40); //id:40 - last field
+        field = gameService.findFieldById(game, 40)
+                .orElseThrow(() -> new IllegalArgumentException("Field doesn't exist")); //id:40 - last field
         assertEquals(field.getId(), 40);
         assertEquals(field.getFieldType(), FieldType.PROPERTY);
         assertEquals(field.getName(), "BOARDWALK");
@@ -51,13 +53,16 @@ class GameServiceTest {
 
     @Test
     void findFieldByName_whenSearchingPropertyFields_shouldReturnCorrect() {
-        Field field = gameService.findFieldByName(game, "JAIL"); //id:11 - jail
+        Field field = gameService.findFieldByName(game, "JAIL")
+                .orElseThrow(() -> new IllegalArgumentException("Field doesn't exist")); //id:11 - jail
+
         assertEquals(field.getId(), 11);
         assertEquals(field.getFieldType(), FieldType.JAIL);
         assertEquals(field.getName(), "JAIL");
 
 
-        field = gameService.findFieldByName(game, "BOARDWALK"); //id:40 - last field
+        field = gameService.findFieldByName(game, "BOARDWALK")
+                .orElseThrow(() -> new IllegalArgumentException("Field doesn't exist")); //id:40 - last field
         assertEquals(field.getId(), 40);
         assertEquals(field.getFieldType(), FieldType.PROPERTY);
         assertEquals(field.getName(), "BOARDWALK");
@@ -69,9 +74,29 @@ class GameServiceTest {
         gameService.addPlayerToGame(game.getGameId(), "testNick");
         Player player1 = game.getPlayers().get(0);
 
-        assertEquals(player1.getPlayerIndex(),1);
-        assertEquals(player1.getNickname(),"testNick");
+        assertEquals(player1.getPlayerIndex(), 1);
+        assertEquals(player1.getNickname(), "testNick");
         assertEquals(player1.getPosition().getFieldType(), FieldType.START);
-        assertEquals(player1.getMoney(),1500);
+        assertEquals(player1.getMoney(), 1500);
+    }
+
+
+    @Test
+    void checkIfDoublet_whenGivenDoubletValues_thenReturnTrue() {
+        int[] dices = {2, 2};
+        assertTrue(gameService.checkIfDoublet(dices));
+
+        int[] dices2 = {6, 6};
+        assertTrue(gameService.checkIfDoublet(dices2));
+    }
+
+
+    @Test
+    void checkIfDoublet_whenGivenNoNDoubletValues_thenReturnFalse() {
+        int[] dices = {1, 4};
+        assertFalse(gameService.checkIfDoublet(dices));
+
+        int[] dices2 = {3, 5};
+        assertFalse(gameService.checkIfDoublet(dices2));
     }
 }

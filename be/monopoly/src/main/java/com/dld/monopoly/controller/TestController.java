@@ -40,5 +40,6 @@ public class TestController {
 //        gameStateDTO.setCurrentPlayer();
         return ResponseEntity.ok(gameStateDTO);
     }
+    
 
 }
