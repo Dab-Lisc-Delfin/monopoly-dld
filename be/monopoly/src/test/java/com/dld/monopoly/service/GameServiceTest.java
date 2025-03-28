@@ -36,15 +36,13 @@ class GameServiceTest {
 
     @Test
     void findFieldById_whenSearchingPropertyFields_shouldReturnCorrect() {
-        Field field = gameService.findFieldById(game, 11)
-                .orElseThrow(() -> new IllegalArgumentException("Field doesn't exist")); //id:11 - jail
+        Field field = gameService.findFieldById(game, 11);
         assertEquals(field.getId(), 11);
         assertEquals(field.getFieldType(), FieldType.JAIL);
         assertEquals(field.getName(), "JAIL");
 
 
-        field = gameService.findFieldById(game, 40)
-                .orElseThrow(() -> new IllegalArgumentException("Field doesn't exist")); //id:40 - last field
+        field = gameService.findFieldById(game, 40);
         assertEquals(field.getId(), 40);
         assertEquals(field.getFieldType(), FieldType.PROPERTY);
         assertEquals(field.getName(), "BOARDWALK");
@@ -53,16 +51,14 @@ class GameServiceTest {
 
     @Test
     void findFieldByName_whenSearchingPropertyFields_shouldReturnCorrect() {
-        Field field = gameService.findFieldByName(game, "JAIL")
-                .orElseThrow(() -> new IllegalArgumentException("Field doesn't exist")); //id:11 - jail
+        Field field = gameService.findFieldByName(game, "JAIL");
 
         assertEquals(field.getId(), 11);
         assertEquals(field.getFieldType(), FieldType.JAIL);
         assertEquals(field.getName(), "JAIL");
 
 
-        field = gameService.findFieldByName(game, "BOARDWALK")
-                .orElseThrow(() -> new IllegalArgumentException("Field doesn't exist")); //id:40 - last field
+        field = gameService.findFieldByName(game, "BOARDWALK");
         assertEquals(field.getId(), 40);
         assertEquals(field.getFieldType(), FieldType.PROPERTY);
         assertEquals(field.getName(), "BOARDWALK");
@@ -99,4 +95,111 @@ class GameServiceTest {
         int[] dices2 = {3, 5};
         assertFalse(gameService.checkIfDoublet(dices2));
     }
+
+
+    @Test
+    void makeMove_whenGivenAllFieldTypes_shouldBehaveCorrectly() {
+        Player testPlayer = gameService.addPlayerToGame(game.getGameId(), "testPlayer");
+        int fixedDiceRolls = 0;
+
+
+        fixedDiceRolls = 4;
+        testPlayer.setAllDiceRollsInThisTour(fixedDiceRolls);
+        gameService.makeMove(game, testPlayer);
+        assertEquals(FieldType.TAX, testPlayer.getPosition().getFieldType());
+        assertEquals("INCOME TAX", testPlayer.getPosition().getName());
+        assertEquals(5, testPlayer.getPosition().getId());
+        assertEquals(1300, testPlayer.getMoney()); //-200$
+
+
+        fixedDiceRolls = 3;
+        testPlayer.setAllDiceRollsInThisTour(fixedDiceRolls);
+        gameService.makeMove(game, testPlayer);
+        assertEquals(FieldType.CHANCE, testPlayer.getPosition().getFieldType());
+        assertEquals("CHANCE", testPlayer.getPosition().getName());
+        assertEquals(8, testPlayer.getPosition().getId());
+
+
+        fixedDiceRolls = 3;
+        testPlayer.setAllDiceRollsInThisTour(fixedDiceRolls);
+        gameService.makeMove(game, testPlayer);
+        assertEquals(FieldType.JAIL, testPlayer.getPosition().getFieldType());
+        assertEquals("JAIL", testPlayer.getPosition().getName());
+        assertEquals(11, testPlayer.getPosition().getId());
+
+
+        fixedDiceRolls = 3;
+        testPlayer.setAllDiceRollsInThisTour(fixedDiceRolls);
+        gameService.makeMove(game, testPlayer);
+        assertEquals(FieldType.PROPERTY, testPlayer.getPosition().getFieldType());
+        assertEquals("STATES AVENUE", testPlayer.getPosition().getName());
+        assertEquals(14, testPlayer.getPosition().getId());
+
+
+        fixedDiceRolls = 4;
+        testPlayer.setAllDiceRollsInThisTour(fixedDiceRolls);
+        gameService.makeMove(game, testPlayer);
+        assertEquals(FieldType.COMMUNITY_CHEST, testPlayer.getPosition().getFieldType());
+        assertEquals("COMMUNITY CHEST", testPlayer.getPosition().getName());
+        assertEquals(18, testPlayer.getPosition().getId());
+
+
+        fixedDiceRolls = 3;
+        testPlayer.setAllDiceRollsInThisTour(fixedDiceRolls);
+        gameService.makeMove(game, testPlayer);
+        assertEquals(FieldType.FREE_PARKING, testPlayer.getPosition().getFieldType());
+        assertEquals("FREE PARKING", testPlayer.getPosition().getName());
+        assertEquals(21, testPlayer.getPosition().getId());
+
+
+        fixedDiceRolls = 5;
+        testPlayer.setAllDiceRollsInThisTour(fixedDiceRolls);
+        gameService.makeMove(game, testPlayer);
+        assertEquals(FieldType.RAILROADS, testPlayer.getPosition().getFieldType());
+        assertEquals("B&O RAILROAD", testPlayer.getPosition().getName());
+        assertEquals(26, testPlayer.getPosition().getId());
+
+
+        fixedDiceRolls = 3;
+        testPlayer.setAllDiceRollsInThisTour(fixedDiceRolls);
+        gameService.makeMove(game, testPlayer);
+        assertEquals(FieldType.WATER_WORKS, testPlayer.getPosition().getFieldType());
+        assertEquals("WATER_WORKS", testPlayer.getPosition().getName());
+        assertEquals(29, testPlayer.getPosition().getId());
+
+
+        fixedDiceRolls = 10;
+        testPlayer.setAllDiceRollsInThisTour(fixedDiceRolls);
+        gameService.makeMove(game, testPlayer);
+        assertEquals(FieldType.TAX, testPlayer.getPosition().getFieldType());
+        assertEquals("LUXURY TAX", testPlayer.getPosition().getName());
+        assertEquals(39, testPlayer.getPosition().getId());
+        assertEquals(1200, testPlayer.getMoney()); //-100$
+
+
+        fixedDiceRolls = 11;
+        testPlayer.setAllDiceRollsInThisTour(fixedDiceRolls);
+        gameService.makeMove(game, testPlayer);
+        assertEquals(FieldType.PROPERTY, testPlayer.getPosition().getFieldType());
+        assertEquals("CONNECTICUT AVENUE", testPlayer.getPosition().getName());
+        assertEquals(10, testPlayer.getPosition().getId());
+        assertEquals(1400, testPlayer.getMoney()); //+200$ //START//
+
+
+        fixedDiceRolls = 3;
+        testPlayer.setAllDiceRollsInThisTour(fixedDiceRolls);
+        gameService.makeMove(game, testPlayer);
+        assertEquals(FieldType.ELECTRICITY, testPlayer.getPosition().getFieldType());
+        assertEquals("ELECTRIC COMPANY", testPlayer.getPosition().getName());
+        assertEquals(13, testPlayer.getPosition().getId());
+
+
+        fixedDiceRolls = 18;
+        testPlayer.setAllDiceRollsInThisTour(fixedDiceRolls);
+        gameService.makeMove(game, testPlayer);
+        assertEquals(FieldType.GO_TO_JAIL, testPlayer.getPosition().getFieldType());
+        assertEquals("JAIL", testPlayer.getPosition().getName());
+        assertEquals(11, testPlayer.getPosition().getId());
+    }
+
 }
