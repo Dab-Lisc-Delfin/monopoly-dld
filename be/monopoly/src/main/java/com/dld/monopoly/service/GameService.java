@@ -62,4 +62,9 @@ public class GameService {
             }
         }
     }
+
+    private void finishTour(Game game){
+        game.getCurrentPlayer().setAfterRoll(false);
+    }
+
 }

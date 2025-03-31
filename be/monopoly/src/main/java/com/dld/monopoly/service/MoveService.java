@@ -65,6 +65,7 @@ public class MoveService {
             makeMoveDependingOfField(field, game, player);
         }
 
+        player.setAfterRoll(true);
         // if(isAvailable to buy?){ buy/don't
         // else{payOwner}
         //else doublet counter++;
@@ -180,5 +181,6 @@ public class MoveService {
             throw new RuntimeException("incorrect dices size");
         }
     }
+
 
 }
