@@ -45,31 +45,31 @@ public class MoveService {
     public Field makeMove(Game game, Player player) {
 //        check if it's your turn //todo
 
-        //if (not doublet) -> move
-        int currentPosition = player.getPosition().getId();
-        int moveLength = player.getAllDiceRollsInThisTour();
-        int newPositionId = 0;
 
-        if (currentPosition + moveLength > 40) {
-            newPositionId = (currentPosition + moveLength) - 40;
-            Field field = gameService.findFieldById(game, newPositionId);
+            //if (not doublet) -> move
+            int currentPosition = player.getPosition().getId();
+            int moveLength = player.getAllDiceRollsInThisTour();
+            int newPositionId = 0;
 
-            makeMoveDependingOfField(field, game, player);
-            passStart(player);
+            if (currentPosition + moveLength > 40) {
+                newPositionId = (currentPosition + moveLength) - 40;
+                Field field = gameService.findFieldById(game, newPositionId);
+
+                makeMoveDependingOfField(field, game, player);
+                passStart(player);
 
 
-        } else {
-            newPositionId = currentPosition + moveLength;
-            Field field = gameService.findFieldById(game, newPositionId);
+            } else {
+                newPositionId = currentPosition + moveLength;
+                Field field = gameService.findFieldById(game, newPositionId);
 
-            makeMoveDependingOfField(field, game, player);
-        }
+                makeMoveDependingOfField(field, game, player);
+            }
 
-        player.setAfterRoll(true);
-        // if(isAvailable to buy?){ buy/don't
-        // else{payOwner}
-        //else doublet counter++;
-
+            player.setAfterRoll(true);
+            // if(isAvailable to buy?){ buy/don't
+            // else{payOwner}
+            //else doublet counter++;
         return null;
     }
 
