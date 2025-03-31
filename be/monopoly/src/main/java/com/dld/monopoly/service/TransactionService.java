@@ -21,7 +21,7 @@ public class TransactionService {
     public void buyProperty(Game game, Player player) {
         Field field = gameService.findFieldById(game, player.getPosition().getId());
 
-        if (player.isAfterRoll() == true) {
+        if (player.isAfterRoll()) {
 
             if (checkIfFieldIsAvailableToBuy(field)) {
                 PropertyField propertyField = (PropertyField) field;
@@ -40,6 +40,10 @@ public class TransactionService {
         } else {
             throw new IllegalStateException("you must move first.");
         }
+    }
+
+    public void payOwnerOfTheProperty(Player owner, Player playerWhoPays) {
+        //todo
     }
 
 

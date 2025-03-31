@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 public class PropertyField extends Field {
 
-    public PropertyField(int id, String name, FieldType fieldType, FieldColor color, int price) {
+    public PropertyField(int id, String name, FieldType fieldType, int price) {
         super(id, name, fieldType);
         this.color = color;
         this.price = price;
@@ -16,9 +16,9 @@ public class PropertyField extends Field {
         this.owner = null;
     }
 
+
     private FieldColor color;
     private int price;
     private boolean isAvailable;
     private Player owner;
-
 }
