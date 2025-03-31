@@ -1,8 +1,12 @@
 package com.dld.monopoly.model;
 
 import com.dld.monopoly.model.fields.Field;
+import com.dld.monopoly.model.fields.PropertyField;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -14,6 +18,8 @@ public class Player {
         this.allDiceRollsInThisTour = 0;
         this.doubletCounter = 0;
         this.isInJail = false;
+        this.properties = new ArrayList<>();
+        this.afterRoll = false;
     }
 
     private String nickname;
@@ -24,4 +30,7 @@ public class Player {
     private int doubletCounter;
     private Field position;
     private boolean isInJail;
+    private List<PropertyField> properties;
+    private boolean afterRoll;
+
 }
