@@ -24,4 +24,5 @@ public class Player {
     private int doubletCounter;
     private Field position;
     private boolean isInJail;
+
 }

@@ -18,12 +18,24 @@ public class GameService {
     }
 
 
-    private void updateGame(Game updatedGame) {
-        for (int i = 0; i < gameManager.getActiveGames().size(); i++) {
-            if (gameManager.getActiveGames().get(i).getGameId().equals(updatedGame.getGameId())) {
-                gameManager.getActiveGames().set(i, updatedGame);
-            }
+    public Player addPlayerToGame(String gameId, String playerNick) {
+        Game game = gameManagerService.getGameById(gameId);
+        Player player = new Player();
+
+        //todo check game status (if game is started can't add a new player)
+        if (game.getPlayers().size() < 6) {
+            player.setPlayerIndex(game.getPlayers().size() + 1);
+            player.setNickname(playerNick);
+            Field field = findFieldById(game, 1);
+            player.setPosition(field);
+
+            game.getPlayers().add(player);
+            updateGame(game);
+        } else {
+            throw new RuntimeException("lobby is full");
         }
+
+        return player;
     }
 
 
@@ -43,23 +55,11 @@ public class GameService {
     }
 
 
-    public Player addPlayerToGame(String gameId, String playerNick) {
-        Game game = gameManagerService.getGameById(gameId);
-        Player player = new Player();
-
-        //todo check game status (if game is started can't add a new player)
-        if (game.getPlayers().size() < 6) {
-            player.setPlayerIndex(game.getPlayers().size() + 1);
-            player.setNickname(playerNick);
-            Field field = findFieldById(game, 1);
-            player.setPosition(field);
-
-            game.getPlayers().add(player);
-            updateGame(game);
-        } else {
-            throw new RuntimeException("lobby is full");
+    private void updateGame(Game updatedGame) {
+        for (int i = 0; i < gameManager.getActiveGames().size(); i++) {
+            if (gameManager.getActiveGames().get(i).getGameId().equals(updatedGame.getGameId())) {
+                gameManager.getActiveGames().set(i, updatedGame);
+            }
         }
-
-        return player;
     }
 }
