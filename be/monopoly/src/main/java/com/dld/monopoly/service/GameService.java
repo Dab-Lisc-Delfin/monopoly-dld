@@ -18,31 +18,6 @@ public class GameService {
     }
 
 
-    private void updateGame(Game updatedGame) {
-        for (int i = 0; i < gameManager.getActiveGames().size(); i++) {
-            if (gameManager.getActiveGames().get(i).getGameId().equals(updatedGame.getGameId())) {
-                gameManager.getActiveGames().set(i, updatedGame);
-            }
-        }
-    }
-
-
-    public Field findFieldById(Game game, int fieldId) {
-        return game.getBoard().getFields().stream()
-                .filter(field -> field.getId() == fieldId)
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Field " + fieldId + " doesn't exist"));
-    }
-
-
-    public Field findFieldByName(Game game, String fieldName) {
-        return game.getBoard().getFields().stream()
-                .filter(field -> field.getName().equals(fieldName))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Field " + fieldName + " doesn't exist"));
-    }
-
-
     public Player addPlayerToGame(String gameId, String playerNick) {
         Game game = gameManagerService.getGameById(gameId);
         Player player = new Player();
@@ -62,4 +37,34 @@ public class GameService {
 
         return player;
     }
+
+
+    public Field findFieldById(Game game, int fieldId) {
+        return game.getBoard().getFields().stream()
+                .filter(field -> field.getId() == fieldId)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Field " + fieldId + " doesn't exist"));
+    }
+
+
+    public Field findFieldByName(Game game, String fieldName) {
+        return game.getBoard().getFields().stream()
+                .filter(field -> field.getName().equals(fieldName))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Field " + fieldName + " doesn't exist"));
+    }
+
+
+    private void updateGame(Game updatedGame) {
+        for (int i = 0; i < gameManager.getActiveGames().size(); i++) {
+            if (gameManager.getActiveGames().get(i).getGameId().equals(updatedGame.getGameId())) {
+                gameManager.getActiveGames().set(i, updatedGame);
+            }
+        }
+    }
+
+    private void finishTour(Game game){
+        game.getCurrentPlayer().setAfterRoll(false);
+    }
+
 }
