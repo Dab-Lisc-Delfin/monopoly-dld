@@ -10,32 +10,32 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class GameServiceTest {
+class GameServiceImplTest {
 
     private static Game game;
     private static GameManager gameManager;
-    private static GameManagerService gameManagerService;
-    private static GameService gameService;
+    private static GameManagerServiceImpl gameManagerServiceImpl;
+    private static GameServiceImpl gameServiceImpl;
 
     @BeforeAll
     static void initializeGame() {
         gameManager = new GameManager();
-        gameManagerService = new GameManagerService(gameManager);
-        gameService = new GameService(gameManager, gameManagerService);
+        gameManagerServiceImpl = new GameManagerServiceImpl(gameManager);
+        gameServiceImpl = new GameServiceImpl(gameManager, gameManagerServiceImpl);
 
-        game = gameManagerService.createNewGame();
+        game = gameManagerServiceImpl.createNewGame();
     }
 
 
     @Test
     void findFieldById_whenSearchingPropertyFields_shouldReturnCorrect() {
-        Field field = gameService.findFieldById(game, 11);
+        Field field = gameServiceImpl.findFieldById(game, 11);
         assertEquals(field.getId(), 11);
         assertEquals(field.getFieldType(), FieldType.JAIL);
         assertEquals(field.getName(), "JAIL");
 
 
-        field = gameService.findFieldById(game, 40);
+        field = gameServiceImpl.findFieldById(game, 40);
         assertEquals(field.getId(), 40);
         assertEquals(field.getFieldType(), FieldType.PROPERTY);
         assertEquals(field.getName(), "BOARDWALK");
@@ -44,14 +44,14 @@ class GameServiceTest {
 
     @Test
     void findFieldByName_whenSearchingPropertyFields_shouldReturnCorrect() {
-        Field field = gameService.findFieldByName(game, "JAIL");
+        Field field = gameServiceImpl.findFieldByName(game, "JAIL");
 
         assertEquals(field.getId(), 11);
         assertEquals(field.getFieldType(), FieldType.JAIL);
         assertEquals(field.getName(), "JAIL");
 
 
-        field = gameService.findFieldByName(game, "BOARDWALK");
+        field = gameServiceImpl.findFieldByName(game, "BOARDWALK");
         assertEquals(field.getId(), 40);
         assertEquals(field.getFieldType(), FieldType.PROPERTY);
         assertEquals(field.getName(), "BOARDWALK");
@@ -60,7 +60,7 @@ class GameServiceTest {
 
     @Test
     void addPlayerToGame_whenAddingPlayerToExistingNotStartedGame_shouldReturnCorrect() {
-        gameService.addPlayerToGame(game.getGameId(), "testNick");
+        gameServiceImpl.addPlayerToGame(game.getGameId(), "testNick");
         Player player1 = game.getPlayers().get(0);
 
         assertEquals(player1.getPlayerIndex(), 1);

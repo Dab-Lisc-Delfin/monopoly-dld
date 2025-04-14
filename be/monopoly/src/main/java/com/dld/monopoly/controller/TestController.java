@@ -2,9 +2,9 @@ package com.dld.monopoly.controller;
 
 import com.dld.monopoly.dto.GameStateDTO;
 import com.dld.monopoly.model.Game;
-import com.dld.monopoly.service.GameManagerService;
-import com.dld.monopoly.service.GameService;
-import com.dld.monopoly.service.MoveService;
+import com.dld.monopoly.service.GameManagerServiceImpl;
+import com.dld.monopoly.service.GameServiceImpl;
+import com.dld.monopoly.service.MoveServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,37 +14,30 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class TestController {
 
-    private final GameService gameService;
-    private final GameManagerService gameManagerService;
-    private final MoveService moveService;
+    private final GameServiceImpl gameServiceImpl;
+    private final GameManagerServiceImpl gameManagerServiceImpl;
+    private final MoveServiceImpl moveServiceImpl;
 
-    public TestController(GameService gameService, MoveService moveService, GameManagerService gameManagerService) {
-        this.gameManagerService = gameManagerService;
-        this.gameService = gameService;
-        this.moveService = moveService;
+    public TestController(GameServiceImpl gameServiceImpl, MoveServiceImpl moveServiceImpl, GameManagerServiceImpl gameManagerServiceImpl) {
+        this.gameManagerServiceImpl = gameManagerServiceImpl;
+        this.gameServiceImpl = gameServiceImpl;
+        this.moveServiceImpl = moveServiceImpl;
     }
 
 
     @GetMapping("/diceTest")
     @ResponseBody
     public String test1() {
-        return moveService.throwDices().toString();
+        return moveServiceImpl.throwDices().toString();
     }
 
 
     @PostMapping("/createGame")
     public ResponseEntity<GameStateDTO> test2() {
-        Game game = gameManagerService.createNewGame();
+        Game game = gameManagerServiceImpl.createNewGame();
 
-        GameStateDTO gameStateDTO = new GameStateDTO();
+        GameStateDTO gameStateDTO = new GameStateDTO(game.getGameId(), null, null, 0, game.getPlayers(), game.getBoard());
 
-
-        gameStateDTO.setGameId(game.getGameId());
-//        gameStateDTO.setGameStatus();
-        gameStateDTO.setBoard(game.getBoard());
-        gameStateDTO.setPlayers(game.getPlayers());
-        gameStateDTO.setCurrentTurn(0);
-//        gameStateDTO.setCurrentPlayer();
         return ResponseEntity.ok(gameStateDTO);
     }
 
