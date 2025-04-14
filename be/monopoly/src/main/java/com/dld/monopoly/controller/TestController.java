@@ -36,15 +36,8 @@ public class TestController {
     public ResponseEntity<GameStateDTO> test2() {
         Game game = gameManagerServiceImpl.createNewGame();
 
-        GameStateDTO gameStateDTO = new GameStateDTO();
+        GameStateDTO gameStateDTO = new GameStateDTO(game.getGameId(), null, null, 0, game.getPlayers(), game.getBoard());
 
-
-        gameStateDTO.setGameId(game.getGameId());
-//        gameStateDTO.setGameStatus();
-        gameStateDTO.setBoard(game.getBoard());
-        gameStateDTO.setPlayers(game.getPlayers());
-        gameStateDTO.setCurrentTurn(0);
-//        gameStateDTO.setCurrentPlayer();
         return ResponseEntity.ok(gameStateDTO);
     }
 
