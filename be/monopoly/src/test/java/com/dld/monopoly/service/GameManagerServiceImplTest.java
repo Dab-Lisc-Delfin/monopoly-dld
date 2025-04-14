@@ -7,21 +7,21 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class GameManagerServiceTest {
+class GameManagerServiceImplTest {
     private GameManager gameManager = new GameManager();
-    private final GameManagerService gameManagerService = new GameManagerService(gameManager);
+    private final GameManagerServiceImpl gameManagerServiceImpl = new GameManagerServiceImpl(gameManager);
 
 
     @Test
     void createNewGame_shouldIncreaseActiveGamesSize() {
-        gameManagerService.createNewGame();
+        gameManagerServiceImpl.createNewGame();
         assertEquals(1, gameManager.getActiveGames().size());
     }
 
 
     @Test
     void createNewGame_checkGameIdLength_returnTrue() {
-        Game game = gameManagerService.createNewGame();
+        Game game = gameManagerServiceImpl.createNewGame();
 
         assertEquals(game.getGameId().length(), 5);
     }
@@ -31,7 +31,7 @@ class GameManagerServiceTest {
     void getGameById_checkIfFindsCorrectly() {
         Game game = new Game("testBoard111", null);
         gameManager.addGame(game);
-        Game gameFound = gameManagerService.getGameById("testBoard111");
+        Game gameFound = gameManagerServiceImpl.getGameById("testBoard111");
 
         assertEquals(gameFound.getGameId(), "testBoard111");
     }
@@ -39,7 +39,7 @@ class GameManagerServiceTest {
 
     @Test
     void initializeBoard_whenBoardIsNotNull() {
-        Board board = gameManagerService.initializeBoard();
+        Board board = gameManagerServiceImpl.initializeBoard();
 
         assertNotNull(board);
         assertNotNull(board.getFields());
@@ -47,7 +47,7 @@ class GameManagerServiceTest {
 
     @Test
     void initializeBoard_shouldAssignCorrectFieldIds() {
-        Board board = gameManagerService.initializeBoard();
+        Board board = gameManagerServiceImpl.initializeBoard();
 
         for (int i = 0; i < 40; i++) {
             assertEquals(board.getFields().get(i).getId(), i + 1);

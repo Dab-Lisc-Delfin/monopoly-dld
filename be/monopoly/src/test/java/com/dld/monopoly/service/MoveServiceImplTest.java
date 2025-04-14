@@ -9,28 +9,28 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class MoveServiceTest {
+class MoveServiceImplTest {
 
     private static Game game;
     private static GameManager gameManager;
-    private static GameManagerService gameManagerService;
-    private static GameService gameService;
-    private static MoveService moveService;
+    private static GameManagerServiceImpl gameManagerServiceImpl;
+    private static GameServiceImpl gameServiceImpl;
+    private static MoveServiceImpl moveServiceImpl;
 
     @BeforeAll
     static void initializeGame() {
         gameManager = new GameManager();
-        gameManagerService = new GameManagerService(gameManager);
-        gameService = new GameService(gameManager, gameManagerService);
-        moveService = new MoveService(gameService);
+        gameManagerServiceImpl = new GameManagerServiceImpl(gameManager);
+        gameServiceImpl = new GameServiceImpl(gameManager, gameManagerServiceImpl);
+        moveServiceImpl = new MoveServiceImpl(gameServiceImpl);
 
-        game = gameManagerService.createNewGame();
+        game = gameManagerServiceImpl.createNewGame();
     }
 
 
     @Test
     void throwDices_shouldReturnDicesBetween1and6() {
-        int[] dices = moveService.throwDices();
+        int[] dices = moveServiceImpl.throwDices();
 
         assertTrue(dices[0] > 0);
         assertTrue(dices[0] < 7);
@@ -43,32 +43,32 @@ class MoveServiceTest {
     @Test
     void checkIfDoublet_whenGivenDoubletValues_thenReturnTrue() {
         int[] dices = {2, 2};
-        assertTrue(moveService.checkIfDoublet(dices));
+        assertTrue(moveServiceImpl.checkIfDoublet(dices));
 
         int[] dices2 = {6, 6};
-        assertTrue(moveService.checkIfDoublet(dices2));
+        assertTrue(moveServiceImpl.checkIfDoublet(dices2));
     }
 
 
     @Test
     void checkIfDoublet_whenGivenNoNDoubletValues_thenReturnFalse() {
         int[] dices = {1, 4};
-        assertFalse(moveService.checkIfDoublet(dices));
+        assertFalse(moveServiceImpl.checkIfDoublet(dices));
 
         int[] dices2 = {3, 5};
-        assertFalse(moveService.checkIfDoublet(dices2));
+        assertFalse(moveServiceImpl.checkIfDoublet(dices2));
     }
 
 
     @Test
     void makeMove_whenGivenAllFieldTypes_shouldBehaveCorrectly() {
-        Player testPlayer = gameService.addPlayerToGame(game.getGameId(), "testPlayer");
+        Player testPlayer = gameServiceImpl.addPlayerToGame(game.getGameId(), "testPlayer");
         int fixedDiceRolls = 0;
 
 
         fixedDiceRolls = 4;
         testPlayer.setAllDiceRollsInThisTour(fixedDiceRolls);
-        moveService.makeMove(game, testPlayer);
+        moveServiceImpl.makeMove(game, testPlayer);
         assertEquals(FieldType.TAX, testPlayer.getPosition().getFieldType());
         assertEquals("INCOME TAX", testPlayer.getPosition().getName());
         assertEquals(5, testPlayer.getPosition().getId());
@@ -77,7 +77,7 @@ class MoveServiceTest {
 
         fixedDiceRolls = 3;
         testPlayer.setAllDiceRollsInThisTour(fixedDiceRolls);
-        moveService.makeMove(game, testPlayer);
+        moveServiceImpl.makeMove(game, testPlayer);
         assertEquals(FieldType.CHANCE, testPlayer.getPosition().getFieldType());
         assertEquals("CHANCE", testPlayer.getPosition().getName());
         assertEquals(8, testPlayer.getPosition().getId());
@@ -85,7 +85,7 @@ class MoveServiceTest {
 
         fixedDiceRolls = 3;
         testPlayer.setAllDiceRollsInThisTour(fixedDiceRolls);
-        moveService.makeMove(game, testPlayer);
+        moveServiceImpl.makeMove(game, testPlayer);
         assertEquals(FieldType.JAIL, testPlayer.getPosition().getFieldType());
         assertEquals("JAIL", testPlayer.getPosition().getName());
         assertEquals(11, testPlayer.getPosition().getId());
@@ -93,7 +93,7 @@ class MoveServiceTest {
 
         fixedDiceRolls = 3;
         testPlayer.setAllDiceRollsInThisTour(fixedDiceRolls);
-        moveService.makeMove(game, testPlayer);
+        moveServiceImpl.makeMove(game, testPlayer);
         assertEquals(FieldType.PROPERTY, testPlayer.getPosition().getFieldType());
         assertEquals("STATES AVENUE", testPlayer.getPosition().getName());
         assertEquals(14, testPlayer.getPosition().getId());
@@ -101,7 +101,7 @@ class MoveServiceTest {
 
         fixedDiceRolls = 4;
         testPlayer.setAllDiceRollsInThisTour(fixedDiceRolls);
-        moveService.makeMove(game, testPlayer);
+        moveServiceImpl.makeMove(game, testPlayer);
         assertEquals(FieldType.COMMUNITY_CHEST, testPlayer.getPosition().getFieldType());
         assertEquals("COMMUNITY CHEST", testPlayer.getPosition().getName());
         assertEquals(18, testPlayer.getPosition().getId());
@@ -109,7 +109,7 @@ class MoveServiceTest {
 
         fixedDiceRolls = 3;
         testPlayer.setAllDiceRollsInThisTour(fixedDiceRolls);
-        moveService.makeMove(game, testPlayer);
+        moveServiceImpl.makeMove(game, testPlayer);
         assertEquals(FieldType.FREE_PARKING, testPlayer.getPosition().getFieldType());
         assertEquals("FREE PARKING", testPlayer.getPosition().getName());
         assertEquals(21, testPlayer.getPosition().getId());
@@ -117,7 +117,7 @@ class MoveServiceTest {
 
         fixedDiceRolls = 5;
         testPlayer.setAllDiceRollsInThisTour(fixedDiceRolls);
-        moveService.makeMove(game, testPlayer);
+        moveServiceImpl.makeMove(game, testPlayer);
         assertEquals(FieldType.RAILROADS, testPlayer.getPosition().getFieldType());
         assertEquals("B&O RAILROAD", testPlayer.getPosition().getName());
         assertEquals(26, testPlayer.getPosition().getId());
@@ -125,7 +125,7 @@ class MoveServiceTest {
 
         fixedDiceRolls = 3;
         testPlayer.setAllDiceRollsInThisTour(fixedDiceRolls);
-        moveService.makeMove(game, testPlayer);
+        moveServiceImpl.makeMove(game, testPlayer);
         assertEquals(FieldType.WATER_WORKS, testPlayer.getPosition().getFieldType());
         assertEquals("WATER WORKS", testPlayer.getPosition().getName());
         assertEquals(29, testPlayer.getPosition().getId());
@@ -133,7 +133,7 @@ class MoveServiceTest {
 
         fixedDiceRolls = 10;
         testPlayer.setAllDiceRollsInThisTour(fixedDiceRolls);
-        moveService.makeMove(game, testPlayer);
+        moveServiceImpl.makeMove(game, testPlayer);
         assertEquals(FieldType.TAX, testPlayer.getPosition().getFieldType());
         assertEquals("LUXURY TAX", testPlayer.getPosition().getName());
         assertEquals(39, testPlayer.getPosition().getId());
@@ -142,7 +142,7 @@ class MoveServiceTest {
 
         fixedDiceRolls = 11;
         testPlayer.setAllDiceRollsInThisTour(fixedDiceRolls);
-        moveService.makeMove(game, testPlayer);
+        moveServiceImpl.makeMove(game, testPlayer);
         assertEquals(FieldType.PROPERTY, testPlayer.getPosition().getFieldType());
         assertEquals("CONNECTICUT AVENUE", testPlayer.getPosition().getName());
         assertEquals(10, testPlayer.getPosition().getId());
@@ -151,7 +151,7 @@ class MoveServiceTest {
 
         fixedDiceRolls = 3;
         testPlayer.setAllDiceRollsInThisTour(fixedDiceRolls);
-        moveService.makeMove(game, testPlayer);
+        moveServiceImpl.makeMove(game, testPlayer);
         assertEquals(FieldType.ELECTRICITY, testPlayer.getPosition().getFieldType());
         assertEquals("ELECTRIC COMPANY", testPlayer.getPosition().getName());
         assertEquals(13, testPlayer.getPosition().getId());
@@ -159,7 +159,7 @@ class MoveServiceTest {
 
         fixedDiceRolls = 18;
         testPlayer.setAllDiceRollsInThisTour(fixedDiceRolls);
-        moveService.makeMove(game, testPlayer);
+        moveServiceImpl.makeMove(game, testPlayer);
         assertEquals(FieldType.JAIL, testPlayer.getPosition().getFieldType());
         assertEquals("JAIL", testPlayer.getPosition().getName());
         assertEquals(11, testPlayer.getPosition().getId());
