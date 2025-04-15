@@ -1,9 +1,11 @@
 package com.dld.monopoly.model.fields;
 
-public class RailroadProperty extends PropertyField implements Rentable{
+import com.dld.monopoly.model.Player;
+
+public class RailroadProperty extends Field implements Rentable{
 
     public RailroadProperty(int id, String name, FieldType fieldType, int price) {
-        super(id, name, fieldType, price);
+        super(id, name, fieldType);
         this.rentWith1Railroads = 25;
         this.rentWith2Railroads = 50;
         this.rentWith3Railroads = 100;
@@ -14,6 +16,11 @@ public class RailroadProperty extends PropertyField implements Rentable{
     private int rentWith2Railroads;
     private int rentWith3Railroads;
     private int rentWith4Railroads;
+    private FieldColor color;
+    private int price;
+    private boolean isAvailable;
+    private Player owner;
+}
 
     @Override
     public int getRentCost() {
