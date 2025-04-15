@@ -4,6 +4,7 @@ import com.dld.monopoly.model.Game;
 import com.dld.monopoly.model.Player;
 import com.dld.monopoly.model.fields.Field;
 import com.dld.monopoly.model.fields.PropertyField;
+import com.dld.monopoly.model.fields.Rentable;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -48,7 +49,7 @@ public class TransactionServiceImpl implements TransactionService{
 
 
     private boolean checkIfFieldIsAvailableToBuy(Field field) {
-        if (!(field instanceof PropertyField)) {
+        if (!(field instanceof Rentable)) {
             return false;
         } else {
             if (((PropertyField) field).getOwner() == null) {
