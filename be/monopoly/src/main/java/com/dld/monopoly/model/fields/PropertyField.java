@@ -8,7 +8,9 @@ import lombok.Setter;
 @Setter
 public class PropertyField extends Field {
 
-    public PropertyField(int id, String name, FieldType fieldType, int price) {
+    //chyba to wywalam? TODO
+
+    public PropertyField(int id, String name, FieldType fieldType, int price, FieldColor color) {
         super(id, name, fieldType);
         this.color = color;
         this.price = price;
