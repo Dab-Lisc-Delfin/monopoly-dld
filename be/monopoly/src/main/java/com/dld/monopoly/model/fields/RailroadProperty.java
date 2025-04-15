@@ -1,22 +1,35 @@
 package com.dld.monopoly.model.fields;
 
-public class RailroadProperty extends PropertyField implements Rentable{
+import com.dld.monopoly.model.Player;
+import lombok.Getter;
+import lombok.Setter;
 
-    public RailroadProperty(int id, String name, FieldType fieldType, int price) {
-        super(id, name, fieldType, price);
-        this.rentWith1Railroads = 25;
-        this.rentWith2Railroads = 50;
-        this.rentWith3Railroads = 100;
-        this.rentWith4Railroads = 200;
+@Getter
+@Setter
+public class RailroadProperty extends Field implements Rentable {
+
+    public RailroadProperty(int id, String name) {
+        super(id, name, FieldType.RAILROADS);
+        this.price = 200;
+        this.isAvailable = true;
+        this.owner = null;
+        this.oneRailroadRent = 25;
+        this.twoRailroadRent = 50;
+        this.threeRailroadRent = 100;
+        this.fourRailroadRent = 200;
     }
 
-    private int rentWith1Railroads;
-    private int rentWith2Railroads;
-    private int rentWith3Railroads;
-    private int rentWith4Railroads;
+    private final int oneRailroadRent;
+    private final int twoRailroadRent;
+    private final int threeRailroadRent;
+    private final int fourRailroadRent;
+    private final int price;
+    private boolean isAvailable;
+    private Player owner;
 
     @Override
     public int getRentCost() {
         return 0;//todo
     }
+
 }

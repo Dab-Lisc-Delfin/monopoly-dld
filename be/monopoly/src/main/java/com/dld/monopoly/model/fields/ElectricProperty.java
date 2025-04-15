@@ -1,8 +1,13 @@
 package com.dld.monopoly.model.fields;
 
-public class ElectricProperty extends PropertyField implements Rentable{
-    public ElectricProperty(int id, String name, FieldType fieldType, int price) {
-        super(id, name, fieldType, price);
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class ElectricProperty extends RentableProperty {
+    public ElectricProperty(int id, String name) {
+        super(id, name, FieldType.UTILITY, 150);
     }
 
     @Override

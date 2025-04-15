@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public abstract class Field {
+public class Field {
 
     private int id;
     private String name;

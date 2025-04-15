@@ -7,8 +7,7 @@ public enum FieldType {
     COMMUNITY_CHEST,
     RAILROADS,
     TAX,
-    ELECTRICITY,
-    WATER_WORKS,
+    UTILITY,
     GO_TO_JAIL,
     JAIL,
     FREE_PARKING
