@@ -126,7 +126,7 @@ class MoveServiceImplTest {
         fixedDiceRolls = 3;
         testPlayer.setAllDiceRollsInThisTour(fixedDiceRolls);
         moveServiceImpl.makeMove(game, testPlayer);
-        assertEquals(FieldType.WATER_WORKS, testPlayer.getPosition().getFieldType());
+        assertEquals(FieldType.UTILITY, testPlayer.getPosition().getFieldType());
         assertEquals("WATER WORKS", testPlayer.getPosition().getName());
         assertEquals(29, testPlayer.getPosition().getId());
 
@@ -152,7 +152,7 @@ class MoveServiceImplTest {
         fixedDiceRolls = 3;
         testPlayer.setAllDiceRollsInThisTour(fixedDiceRolls);
         moveServiceImpl.makeMove(game, testPlayer);
-        assertEquals(FieldType.ELECTRICITY, testPlayer.getPosition().getFieldType());
+        assertEquals(FieldType.UTILITY, testPlayer.getPosition().getFieldType());
         assertEquals("ELECTRIC COMPANY", testPlayer.getPosition().getName());
         assertEquals(13, testPlayer.getPosition().getId());
 

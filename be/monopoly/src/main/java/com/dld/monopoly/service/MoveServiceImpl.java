@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.Random;
 
 @Service
-public class MoveServiceImpl implements MoveService{
+public class MoveServiceImpl implements MoveService {
 
     private GameServiceImpl gameServiceImpl;
 
@@ -46,30 +46,30 @@ public class MoveServiceImpl implements MoveService{
 //        check if it's your turn //todo
 
 
-            //if (not doublet) -> move
-            int currentPosition = player.getPosition().getId();
-            int moveLength = player.getAllDiceRollsInThisTour();
-            int newPositionId = 0;
+        //if (not doublet) -> move
+        int currentPosition = player.getPosition().getId();
+        int moveLength = player.getAllDiceRollsInThisTour();
+        int newPositionId = 0;
 
-            if (currentPosition + moveLength > 40) {
-                newPositionId = (currentPosition + moveLength) - 40;
-                Field field = gameServiceImpl.findFieldById(game, newPositionId);
+        if (currentPosition + moveLength > 40) {
+            newPositionId = (currentPosition + moveLength) - 40;
+            Field field = gameServiceImpl.findFieldById(game, newPositionId);
 
-                makeMoveDependingOfField(field, game, player);
-                passStart(player);
+            makeMoveDependingOfField(field, game, player);
+            passStart(player);
 
 
-            } else {
-                newPositionId = currentPosition + moveLength;
-                Field field = gameServiceImpl.findFieldById(game, newPositionId);
+        } else {
+            newPositionId = currentPosition + moveLength;
+            Field field = gameServiceImpl.findFieldById(game, newPositionId);
 
-                makeMoveDependingOfField(field, game, player);
-            }
+            makeMoveDependingOfField(field, game, player);
+        }
 
-            player.setAfterRoll(true);
-            // if(isAvailable to buy?){ buy/don't
-            // else{payOwner}
-            //else doublet counter++;
+        player.setAfterRoll(true);
+        // if(isAvailable to buy?){ buy/don't
+        // else{payOwner}
+        //else doublet counter++;
         return null;
     }
 
@@ -99,13 +99,13 @@ public class MoveServiceImpl implements MoveService{
                 moveToProperty(player, field);
                 payTax(player, field);
             }
-            case FieldType.ELECTRICITY -> {
+            case FieldType.UTILITY -> {
                 moveToProperty(player, field);
-                ifElectricityHasOwnerPayHim(player);
-            }
-            case FieldType.WATER_WORKS -> {
-                moveToProperty(player, field);
-                ifWaterWorksHasOwnerPayHim(player);
+                if (field.getName().equals("ELECTRIC COMPANY")) {
+                    ifElectricityHasOwnerPayHim(player);
+                } else {
+                    ifWaterWorksHasOwnerPayHim(player);
+                }
             }
             case FieldType.FREE_PARKING -> moveToProperty(player, field);
             case FieldType.JAIL -> moveToProperty(player, field);
