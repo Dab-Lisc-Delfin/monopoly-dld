@@ -5,11 +5,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ResidentialProperty extends Field implements Rentable {
+public class ResidentialProperty extends RentableProperty {
 
     public ResidentialProperty(int id, String name, FieldColor color, int price, int rent, int rentWithColorSet, int rentWith1House, int rentWith2House, int rentWith3House, int rentWith4House, int rentWithHotel, int housesCost, int hotelsCost) {
-        super(id, name, FieldType.PROPERTY);
-        this.price = price;
+        super(id, name, FieldType.PROPERTY, price);
         this.rent = rent;
         this.color = color;
         this.housesCost = housesCost;
@@ -26,7 +25,6 @@ public class ResidentialProperty extends Field implements Rentable {
     }
 
     private final FieldColor color;
-    private final int price;
     private final int rent;
     private final int rentWithColorSet;
     private final int rentWith1House;
@@ -42,26 +40,6 @@ public class ResidentialProperty extends Field implements Rentable {
 
     @Override
     public int getRentCost() {
-        return 0;//todo
+        return 0;//TODO
     }
 }
-
-//package com.dld.monopoly.model.fields;
-//
-//import com.dld.monopoly.model.Player;
-//
-//abstract class RentableProperty extends Field {
-//    protected Player owner;
-//    protected int price;
-//
-//    protected RentableProperty(int id, String name, FieldType fieldType, int price) {
-//        super(id,name,fieldType);
-//        this.owner = null;
-//    }
-//
-//    abstract int getRentCost();
-//}
-//
-////private int id;
-////    private String name;
-////    private FieldType fieldType;
