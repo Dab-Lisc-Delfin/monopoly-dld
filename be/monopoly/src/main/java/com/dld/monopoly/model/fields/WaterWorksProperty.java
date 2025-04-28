@@ -5,13 +5,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class WaterWorksProperty extends Field implements Rentable {
+public class WaterWorksProperty extends RentableProperty {
     public WaterWorksProperty(int id, String name) {
-        super(id, name, FieldType.UTILITY);
-        this.price = 150;
+        super(id, name, FieldType.UTILITY, 150);
     }
-
-    private final int price;
 
     @Override
     public int getRentCost() {
