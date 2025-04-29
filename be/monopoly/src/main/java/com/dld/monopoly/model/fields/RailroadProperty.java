@@ -27,7 +27,7 @@ public class RailroadProperty extends RentableProperty {
 
 
     @Override
-    int getRentCost() {
+    public int getRentCost() {
         //TODO
         return 0;
     }
