@@ -1,5 +1,6 @@
 package com.dld.monopoly.service;
 
+import com.dld.monopoly.model.Card;
 import com.dld.monopoly.model.Game;
 import com.dld.monopoly.model.GameManager;
 import com.dld.monopoly.model.Player;
@@ -8,6 +9,12 @@ import com.dld.monopoly.model.fields.FieldType;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasItem;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameServiceImplTest {
@@ -69,4 +76,37 @@ class GameServiceImplTest {
         assertEquals(player1.getMoney(), 1500);
     }
 
+    @Test
+    void shuffleCards_shouldShuffleCardsInArray() {
+        List<Card> cards = new LinkedList<>();
+
+        Card card1 = new Card("testCard1", "testDesc1");
+        Card card2 = new Card("testCard2", "testDesc2");
+        Card card3 = new Card("testCard3", "testDesc3");
+        Card card4 = new Card("testCard4", "testDesc4");
+        Card card5 = new Card("testCard5", "testDesc5");
+        Card card6 = new Card("testCard6", "testDesc6");
+        Card card7 = new Card("testCard7", "testDesc7");
+
+        cards.add(card1);
+        cards.add(card2);
+        cards.add(card3);
+        cards.add(card4);
+        cards.add(card5);
+        cards.add(card6);
+        cards.add(card7);
+
+        List<Card> shuffledDeck = gameServiceImpl.shuffleCards(cards);
+
+        assertNotEquals(shuffledDeck, cards);
+
+        assertTrue(shuffledDeck.contains(card1));
+        assertTrue(shuffledDeck.contains(card2));
+        assertTrue(shuffledDeck.contains(card3));
+        assertTrue(shuffledDeck.contains(card4));
+        assertTrue(shuffledDeck.contains(card5));
+        assertTrue(shuffledDeck.contains(card6));
+        assertTrue(shuffledDeck.contains(card7));
+
+    }
 }
