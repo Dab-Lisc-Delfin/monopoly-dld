@@ -1,8 +1,11 @@
 package com.dld.monopoly.service;
 
+import com.dld.monopoly.model.Card;
 import com.dld.monopoly.model.Game;
 import com.dld.monopoly.model.Player;
 import com.dld.monopoly.model.fields.Field;
+
+import java.util.List;
 
 public interface GameService {
 
@@ -11,4 +14,7 @@ public interface GameService {
     Field findFieldById(Game game, int fieldId);
 
     Field findFieldByName(Game game, String fieldName);
+
+    List<Card> shuffleCards(List<Card> cards);
+
 }
