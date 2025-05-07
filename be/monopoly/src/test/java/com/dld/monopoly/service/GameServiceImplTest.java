@@ -80,13 +80,13 @@ class GameServiceImplTest {
     void shuffleCards_shouldShuffleCardsInArray() {
         List<Card> cards = new LinkedList<>();
 
-        Card card1 = new Card("testCard1", "testDesc1");
-        Card card2 = new Card("testCard2", "testDesc2");
-        Card card3 = new Card("testCard3", "testDesc3");
-        Card card4 = new Card("testCard4", "testDesc4");
-        Card card5 = new Card("testCard5", "testDesc5");
-        Card card6 = new Card("testCard6", "testDesc6");
-        Card card7 = new Card("testCard7", "testDesc7");
+        Card card1 = new Card("testCard1");
+        Card card2 = new Card("testCard2");
+        Card card3 = new Card("testCard3");
+        Card card4 = new Card("testCard4");
+        Card card5 = new Card("testCard5");
+        Card card6 = new Card("testCard6");
+        Card card7 = new Card("testCard7");
 
         cards.add(card1);
         cards.add(card2);

@@ -7,11 +7,9 @@ import lombok.Setter;
 @Setter
 public class Card {
 
-    public Card(String name, String description) {
+    public Card(String name) {
         this.name = name;
-        this.description = description;
     }
 
     private String name;
-    private String description;
 }

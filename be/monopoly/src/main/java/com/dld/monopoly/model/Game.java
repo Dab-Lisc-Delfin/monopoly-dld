@@ -18,4 +18,7 @@ public class Game {
     private List<Player> players;
     private Board board;
     private Player currentPlayer;
+    private List<Card> chanceCards;
+    private List<Card> communityChestCards;
+
 }
