@@ -6,11 +6,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class RailroadProperty extends Field implements Rentable {
-
+public class RailroadProperty extends RentableProperty {
+//    protected RentableProperty(int id, String name, FieldType fieldType, int price) {
     public RailroadProperty(int id, String name) {
-        super(id, name, FieldType.RAILROADS);
-        this.price = 200;
+        super(id, name, FieldType.RAILROADS, 200);
         this.isAvailable = true;
         this.owner = null;
         this.oneRailroadRent = 25;
@@ -23,13 +22,13 @@ public class RailroadProperty extends Field implements Rentable {
     private final int twoRailroadRent;
     private final int threeRailroadRent;
     private final int fourRailroadRent;
-    private final int price;
     private boolean isAvailable;
     private Player owner;
 
+
     @Override
     public int getRentCost() {
-        return 0;//todo
+        //TODO
+        return 0;
     }
-
 }

@@ -3,4 +3,5 @@ import com.dld.monopoly.model.Game;
 
 public interface GameManagerService {
     Game createNewGame();
+
 }

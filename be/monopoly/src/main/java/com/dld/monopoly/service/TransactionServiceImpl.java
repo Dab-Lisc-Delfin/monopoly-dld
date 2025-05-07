@@ -3,8 +3,7 @@ package com.dld.monopoly.service;
 import com.dld.monopoly.model.Game;
 import com.dld.monopoly.model.Player;
 import com.dld.monopoly.model.fields.Field;
-import com.dld.monopoly.model.fields.PropertyField;
-import com.dld.monopoly.model.fields.Rentable;
+import com.dld.monopoly.model.fields.RentableProperty;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +11,7 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class TransactionServiceImpl implements TransactionService{
+public class TransactionServiceImpl implements TransactionService {
     private final GameServiceImpl gameServiceImpl;
 
     public TransactionServiceImpl(GameServiceImpl gameServiceImpl) {
@@ -20,26 +19,30 @@ public class TransactionServiceImpl implements TransactionService{
     }
 
     public void buyProperty(Game game, Player player) {
-        Field field = gameServiceImpl.findFieldById(game, player.getPosition().getId());
+        RentableProperty field = (RentableProperty) gameServiceImpl.findFieldById(game, player.getPosition().getId());
 
-        if (player.isAfterRoll()) {
+        if (field instanceof RentableProperty) {
+            if (player.isAfterRoll()) {
+                if (checkIfFieldIsAvailableToBuy(field)) {
 
-            if (checkIfFieldIsAvailableToBuy(field)) {
-                PropertyField propertyField = (PropertyField) field;
+                    if (field instanceof RentableProperty)
 
-                if (checkIfPlayerHasEnoughMoney(player, propertyField)) {
-                    propertyField.setOwner(player);
-                    propertyField.setAvailable(false);
-                    payForProperty(player, propertyField);
-                    addPropertyToPlayer(player, propertyField);
-                    log.info("Player {} has bought the property: {}", player.getNickname(), propertyField.getId());
+                        if (checkIfPlayerHasEnoughMoneyToBuyProperty(player, field)) {
+                            field.setOwner(player);
+                            field.setAvailable(false);
+                            payForProperty(player, field);
+                            addPropertyToPlayer(player, field);
+                            log.info("Player {} has bought the property: {}", player.getNickname(), field.getId());
+                        }
+
+                } else {
+                    throw new IllegalStateException("you can't buy this property");
                 }
-
             } else {
-                throw new IllegalStateException("you can't buy this property");
+                throw new IllegalStateException("you must move first.");
             }
         } else {
-            throw new IllegalStateException("you must move first.");
+            throw new IllegalStateException("you can't buy this property");
         }
     }
 
@@ -49,10 +52,10 @@ public class TransactionServiceImpl implements TransactionService{
 
 
     private boolean checkIfFieldIsAvailableToBuy(Field field) {
-        if (!(field instanceof Rentable)) {
+        if (!(field instanceof RentableProperty)) {
             return false;
         } else {
-            if (((PropertyField) field).getOwner() == null) {
+            if (((RentableProperty) field).getOwner() == null) {
                 return true;
             }
         }
@@ -60,20 +63,20 @@ public class TransactionServiceImpl implements TransactionService{
     }
 
 
-    private void addPropertyToPlayer(Player player, PropertyField propertyField) {
-        List<PropertyField> properties = player.getProperties();
-        properties.add(propertyField);
+    private void addPropertyToPlayer(Player player, RentableProperty rentableProperty) {
+        List<Field> properties = player.getProperties();
+        properties.add(rentableProperty);
         player.setProperties(properties);
     }
 
 
-    private void payForProperty(Player player, PropertyField propertyField) {
-        player.setMoney(player.getMoney() - propertyField.getPrice());
+    private void payForProperty(Player player, RentableProperty rentableProperty) {
+        player.setMoney(player.getMoney() - rentableProperty.getPrice());
     }
 
 
-    private boolean checkIfPlayerHasEnoughMoney(Player player, PropertyField propertyField) {
-        if (player.getMoney() >= propertyField.getPrice()) {
+    private boolean checkIfPlayerHasEnoughMoneyToBuyProperty(Player player, RentableProperty rentableProperty) {
+        if (player.getMoney() >= rentableProperty.getPrice()) {
             return true;
         } else {
             return false;

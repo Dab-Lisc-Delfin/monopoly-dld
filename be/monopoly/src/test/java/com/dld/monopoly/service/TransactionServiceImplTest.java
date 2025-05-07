@@ -3,7 +3,7 @@ package com.dld.monopoly.service;
 import com.dld.monopoly.model.Game;
 import com.dld.monopoly.model.GameManager;
 import com.dld.monopoly.model.Player;
-import com.dld.monopoly.model.fields.PropertyField;
+import com.dld.monopoly.model.fields.RentableProperty;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -31,7 +31,7 @@ class TransactionServiceImplTest {
     void buyProperty_whenPlayerCanBuyProperty_returnCorrect() {
         Player player = new Player();
         player.setAfterRoll(true);
-        PropertyField field = (PropertyField) gameServiceImpl.findFieldById(game, 4);
+        RentableProperty field = (RentableProperty) gameServiceImpl.findFieldById(game, 4);
         player.setPosition(field);
         transactionServiceImpl.buyProperty(game, player);
 

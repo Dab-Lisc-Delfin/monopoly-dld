@@ -1,14 +1,20 @@
 package com.dld.monopoly.service;
 
+import com.dld.monopoly.model.Card;
 import com.dld.monopoly.model.Game;
 import com.dld.monopoly.model.GameManager;
 import com.dld.monopoly.model.Player;
 import com.dld.monopoly.model.fields.Field;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
+
 
 @Service
-public class GameServiceImpl implements GameService{
+public class GameServiceImpl implements GameService {
     private final GameManager gameManager;
     private final GameManagerServiceImpl gameManagerServiceImpl;
 
@@ -54,6 +60,25 @@ public class GameServiceImpl implements GameService{
                 .orElseThrow(() -> new IllegalArgumentException("Field " + fieldName + " doesn't exist"));
     }
 
+    @Override
+    public List<Card> shuffleCards(List<Card> cards) {
+        Random rnd = new Random();
+        int randomNum;
+
+        List<Integer> alreadyUsedNums = new ArrayList<>();
+        List<Card> shuffledDeck = new LinkedList<>();
+
+        while (shuffledDeck.size() != cards.size()) {
+            randomNum = rnd.nextInt(cards.size());
+            if (!alreadyUsedNums.contains(randomNum)) {
+                alreadyUsedNums.add(randomNum);
+                shuffledDeck.add(cards.get(randomNum));
+            }
+        }
+
+        return shuffledDeck;
+    }
+
 
     private void updateGame(Game updatedGame) {
         for (int i = 0; i < gameManager.getActiveGames().size(); i++) {
@@ -63,7 +88,7 @@ public class GameServiceImpl implements GameService{
         }
     }
 
-    private void finishTour(Game game){
+    private void finishTour(Game game) {
         game.getCurrentPlayer().setAfterRoll(false);
     }
 
