@@ -7,6 +7,7 @@ import com.dld.monopoly.model.Player;
 import com.dld.monopoly.model.fields.Field;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -62,22 +63,20 @@ public class GameServiceImpl implements GameService {
     @Override
     public List<Card> shuffleCards(List<Card> cards) {
         Random rnd = new Random();
-        int counter = 0;
-        int randomNum = -1;
+        int randomNum;
 
+        List<Integer> alreadyUsedNums = new ArrayList<>();
         List<Card> shuffledDeck = new LinkedList<>();
 
-        while (counter != cards.size()) {
+        while (shuffledDeck.size() != cards.size()) {
             randomNum = rnd.nextInt(cards.size());
-
-            if (cards.get(randomNum) != null) {
-
+            if (!alreadyUsedNums.contains(randomNum)) {
+                alreadyUsedNums.add(randomNum);
+                shuffledDeck.add(cards.get(randomNum));
             }
-
         }
 
-
-        return null;
+        return shuffledDeck;
     }
 
 
