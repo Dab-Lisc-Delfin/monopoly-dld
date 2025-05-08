@@ -2,7 +2,6 @@ package com.dld.monopoly.controller;
 
 import com.dld.monopoly.dto.GameStateDTO;
 import com.dld.monopoly.model.Game;
-import com.dld.monopoly.service.GameManagerServiceImpl;
 import com.dld.monopoly.service.GameServiceImpl;
 import com.dld.monopoly.service.MoveServiceImpl;
 import org.springframework.http.ResponseEntity;
@@ -15,11 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class TestController {
 
     private final GameServiceImpl gameServiceImpl;
-    private final GameManagerServiceImpl gameManagerServiceImpl;
     private final MoveServiceImpl moveServiceImpl;
 
-    public TestController(GameServiceImpl gameServiceImpl, MoveServiceImpl moveServiceImpl, GameManagerServiceImpl gameManagerServiceImpl) {
-        this.gameManagerServiceImpl = gameManagerServiceImpl;
+    public TestController(GameServiceImpl gameServiceImpl, MoveServiceImpl moveServiceImpl) {
         this.gameServiceImpl = gameServiceImpl;
         this.moveServiceImpl = moveServiceImpl;
     }
@@ -34,7 +31,7 @@ public class TestController {
 
     @PostMapping("/createGame")
     public ResponseEntity<GameStateDTO> test2() {
-        Game game = gameManagerServiceImpl.createNewGame();
+        Game game = gameServiceImpl.createNewGame();
 
         GameStateDTO gameStateDTO = new GameStateDTO(game.getGameId(), null, null, 0, game.getPlayers(), game.getBoard());
 

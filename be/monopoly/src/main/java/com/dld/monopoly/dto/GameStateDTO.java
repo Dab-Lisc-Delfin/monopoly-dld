@@ -2,6 +2,7 @@ package com.dld.monopoly.dto;
 
 import com.dld.monopoly.model.Board;
 import com.dld.monopoly.model.Player;
+
 import java.util.List;
 
 public record GameStateDTO(

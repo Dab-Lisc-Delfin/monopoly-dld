@@ -1,36 +1,53 @@
 package com.dld.monopoly.service;
 
-import com.dld.monopoly.model.Card;
-import com.dld.monopoly.model.Game;
-import com.dld.monopoly.model.GameManager;
-import com.dld.monopoly.model.Player;
+import com.dld.monopoly.model.*;
 import com.dld.monopoly.model.fields.Field;
 import com.dld.monopoly.model.fields.FieldType;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.hasItem;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameServiceImplTest {
 
     private static Game game;
     private static GameManager gameManager;
-    private static GameManagerServiceImpl gameManagerServiceImpl;
     private static GameServiceImpl gameServiceImpl;
 
     @BeforeAll
     static void initializeGame() {
-        gameManager = new GameManager();
-        gameManagerServiceImpl = new GameManagerServiceImpl(gameManager);
-        gameServiceImpl = new GameServiceImpl(gameManager, gameManagerServiceImpl);
+        gameManager = GameManager.getInstance();
+        gameServiceImpl = new GameServiceImpl();
+        game = gameServiceImpl.createNewGame();
+        gameManager.addGame(game);
+    }
 
-        game = gameManagerServiceImpl.createNewGame();
+
+    @Test
+    void createNewGame_checkGameIdLength_returnTrue() {
+        Game game = gameServiceImpl.createNewGame();
+        assertEquals(game.getGameId().length(), 5);
+    }
+
+
+    @Test
+    void initializeBoard_whenBoardIsNotNull() {
+        Board board = gameServiceImpl.initializeBoard();
+
+        assertNotNull(board);
+        assertNotNull(board.getFields());
+    }
+
+    @Test
+    void initializeBoard_shouldAssignCorrectFieldIds() {
+        Board board = gameServiceImpl.initializeBoard();
+
+        for (int i = 0; i < 40; i++) {
+            assertEquals(board.getFields().get(i).getId(), i + 1);
+        }
     }
 
 
