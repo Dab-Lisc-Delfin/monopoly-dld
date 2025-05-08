@@ -23,6 +23,7 @@ class MoveServiceImplTest {
         moveServiceImpl = new MoveServiceImpl(gameServiceImpl);
 
         game = gameServiceImpl.createNewGame();
+        gameManager.addGame(game);
     }
 
 
