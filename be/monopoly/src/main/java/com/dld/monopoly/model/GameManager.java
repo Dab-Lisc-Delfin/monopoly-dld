@@ -9,6 +9,7 @@ import java.util.List;
 public class GameManager {
 
     private static GameManager instance;
+
     public static GameManager getInstance() {
         if (instance == null) {
             instance = new GameManager();
@@ -22,8 +23,14 @@ public class GameManager {
     public void addGame(Game game) {
         activeGames.add(game);
     }
-    public void deleteGame() {
-        //todo
+
+    public void deleteGame(String gameId) {
+        for (Game game : activeGames) {
+            if (game.getGameId().equals(gameId)) {
+                activeGames.remove(game);
+                return;
+            }
+        }
     }
 
     public Game getGameById(String gameId) {

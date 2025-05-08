@@ -3,7 +3,7 @@ package com.dld.monopoly.model;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 class GameManagerTest {
@@ -26,7 +26,14 @@ class GameManagerTest {
 
 
     @Test
-    void deleteGame() {
+    void deleteGame_addGameThenDeleteIt() {
+        Game game = new Game("12345", null);
+        gameManager.addGame(game);
+        assertTrue(gameManager.getActiveGames().contains(game));
+
+        gameManager.deleteGame("12345");
+        assertFalse(gameManager.getActiveGames().contains(game));
+
     }
 
 
