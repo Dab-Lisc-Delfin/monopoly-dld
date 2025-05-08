@@ -12,18 +12,17 @@ import static org.junit.jupiter.api.Assertions.*;
 class TransactionServiceImplTest {
     private static Game game;
     private static GameManager gameManager;
-    private static GameManagerServiceImpl gameManagerServiceImpl;
     private static GameServiceImpl gameServiceImpl;
     private static TransactionServiceImpl transactionServiceImpl;
 
     @BeforeAll
     static void initializeGame() {
         gameManager = new GameManager();
-        gameManagerServiceImpl = new GameManagerServiceImpl(gameManager);
-        gameServiceImpl = new GameServiceImpl(gameManager, gameManagerServiceImpl);
+        gameServiceImpl = new GameServiceImpl();
         transactionServiceImpl = new TransactionServiceImpl(gameServiceImpl);
 
-        game = gameManagerServiceImpl.createNewGame();
+        game = gameServiceImpl.createNewGame();
+        gameManager.addGame(game);
     }
 
 

@@ -13,18 +13,17 @@ class MoveServiceImplTest {
 
     private static Game game;
     private static GameManager gameManager;
-    private static GameManagerServiceImpl gameManagerServiceImpl;
     private static GameServiceImpl gameServiceImpl;
     private static MoveServiceImpl moveServiceImpl;
 
     @BeforeAll
     static void initializeGame() {
-        gameManager = new GameManager();
-        gameManagerServiceImpl = new GameManagerServiceImpl(gameManager);
-        gameServiceImpl = new GameServiceImpl(gameManager, gameManagerServiceImpl);
+        gameManager = GameManager.getInstance();
+        gameServiceImpl = new GameServiceImpl();
         moveServiceImpl = new MoveServiceImpl(gameServiceImpl);
 
-        game = gameManagerServiceImpl.createNewGame();
+        game = gameServiceImpl.createNewGame();
+        gameManager.addGame(game);
     }
 
 
