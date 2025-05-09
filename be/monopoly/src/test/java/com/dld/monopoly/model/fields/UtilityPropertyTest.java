@@ -1,5 +1,6 @@
 package com.dld.monopoly.model.fields;
 
+import com.dld.monopoly.model.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -8,17 +9,24 @@ import static org.junit.jupiter.api.Assertions.*;
 class UtilityPropertyTest {
 
     private UtilityProperty mockUtilityProperty;
+    private Player player;
 
     @BeforeEach
     void initialize() {
         this.mockUtilityProperty = new UtilityProperty(1, "testUtilityProperty");
+        this.player = new Player();
+
+        mockUtilityProperty.setOwner(player);
+        player.getProperties().add(mockUtilityProperty);
     }
 
 
     @Test
     void getRentCost_whenOwnBothUtilities() {
+        UtilityProperty mockUtilityProperty2 = new UtilityProperty(2, "testUtilityProperty2");
+        player.getProperties().add(mockUtilityProperty2);
+
         int dices = 3;
-        mockUtilityProperty.setHasBothUtilities(true);
 
         assertEquals(30, mockUtilityProperty.getRentCost(dices));
 
