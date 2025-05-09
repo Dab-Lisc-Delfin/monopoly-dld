@@ -26,7 +26,6 @@ public class RailroadProperty extends RentableProperty {
     private Player owner;
 
 
-    @Override
     public int getRentCost() {
         //TODO
         return 0;

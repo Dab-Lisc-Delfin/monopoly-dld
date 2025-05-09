@@ -107,7 +107,7 @@ public class GameServiceImpl implements GameService {
         boardField.add(new Field(11, "JAIL", FieldType.JAIL));
 
         boardField.add(new ResidentialProperty(12, "ST. CHARLES PLACE", FieldColor.PINK, 140, 10, 20, 50, 150, 450, 625, 750, 100, 100));
-        boardField.add(new ElectricProperty(13, "ELECTRIC COMPANY"));
+        boardField.add(new UtilityProperty(13, "ELECTRIC COMPANY"));
         boardField.add(new ResidentialProperty(14, "STATES AVENUE", FieldColor.PINK, 140, 10, 20, 50, 150, 450, 625, 750, 100, 100));
         boardField.add(new ResidentialProperty(15, "VIRGINIA AVENUE", FieldColor.PINK, 160, 12, 24, 60, 180, 500, 700, 900, 100, 100));
         boardField.add(new RailroadProperty(16, "PENNSYLVANIA RAILROAD"));
@@ -124,7 +124,7 @@ public class GameServiceImpl implements GameService {
         boardField.add(new RailroadProperty(26, "B&O RAILROAD"));
         boardField.add(new ResidentialProperty(27, "ATLANTIC AVENUE", FieldColor.YELLOW, 260, 22, 44, 110, 330, 800, 975, 1150, 150, 150));
         boardField.add(new ResidentialProperty(28, "VENTNOR AVENUE", FieldColor.YELLOW, 260, 22, 44, 110, 330, 800, 975, 1150, 150, 150));
-        boardField.add(new WaterWorksProperty(29, "WATER WORKS"));
+        boardField.add(new UtilityProperty(29, "WATER WORKS"));
         boardField.add(new ResidentialProperty(30, "MARVIN GARDENS", FieldColor.YELLOW, 280, 24, 48, 120, 360, 850, 1025, 1200, 150, 150));
         boardField.add(new Field(31, "GO TO JAIL", FieldType.GO_TO_JAIL));
 
