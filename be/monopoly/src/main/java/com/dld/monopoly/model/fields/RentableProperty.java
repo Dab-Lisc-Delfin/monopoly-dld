@@ -18,9 +18,4 @@ public class RentableProperty extends Field {
     protected final int price;
     protected boolean isAvailable;
 
-    public int getRentCost() {
-        //TODO
-        return 0;
-    }
-
 }

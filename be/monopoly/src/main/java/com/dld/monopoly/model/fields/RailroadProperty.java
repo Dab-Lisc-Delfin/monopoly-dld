@@ -1,13 +1,11 @@
 package com.dld.monopoly.model.fields;
 
-import com.dld.monopoly.model.Player;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 public class RailroadProperty extends RentableProperty {
-//    protected RentableProperty(int id, String name, FieldType fieldType, int price) {
     public RailroadProperty(int id, String name) {
         super(id, name, FieldType.RAILROADS, 200);
         this.isAvailable = true;
@@ -23,12 +21,29 @@ public class RailroadProperty extends RentableProperty {
     private final int threeRailroadRent;
     private final int fourRailroadRent;
     private boolean isAvailable;
-    private Player owner;
 
-
-    @Override
     public int getRentCost() {
-        //TODO
-        return 0;
+        int ownedRailroads = getAmountOwnedRailroads();
+
+        if (ownedRailroads == 4) {
+            return fourRailroadRent;
+        } else if (ownedRailroads == 3) {
+            return threeRailroadRent;
+        } else if (ownedRailroads == 2) {
+            return twoRailroadRent;
+        } else {
+            return oneRailroadRent;
+        }
+    }
+
+    private int getAmountOwnedRailroads() {
+        int ownedRailroads = 0;
+
+        for (Field property : owner.getProperties()) {
+            if (property.getFieldType().equals(FieldType.RAILROADS)) {
+                ownedRailroads++;
+            }
+        }
+        return ownedRailroads;
     }
 }

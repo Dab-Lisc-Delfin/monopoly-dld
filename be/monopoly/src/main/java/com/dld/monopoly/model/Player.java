@@ -1,6 +1,7 @@
 package com.dld.monopoly.model;
 
 import com.dld.monopoly.model.fields.Field;
+import com.dld.monopoly.model.fields.RentableProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -29,7 +30,7 @@ public class Player {
     private int doubletCounter;
     private Field position;
     private boolean isInJail;
-    private List<Field> properties;
+    private List<RentableProperty> properties;
     private boolean afterRoll;
 
 }

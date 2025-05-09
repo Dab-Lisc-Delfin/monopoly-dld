@@ -64,9 +64,8 @@ public class TransactionServiceImpl implements TransactionService {
 
 
     private void addPropertyToPlayer(Player player, RentableProperty rentableProperty) {
-        List<Field> properties = player.getProperties();
-        properties.add(rentableProperty);
-        player.setProperties(properties);
+        player.getProperties().add(rentableProperty);
+        rentableProperty.setOwner(player);
     }
 
 

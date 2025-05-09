@@ -20,7 +20,6 @@ public class ResidentialProperty extends RentableProperty {
         this.rentWithColorSet = rentWithColorSet;
         this.hotelsCost = hotelsCost;
 
-        this.hasColorSet = false;
         this.housesAmount = 0;
         this.hotelsAmount = 0;
     }
@@ -37,11 +36,9 @@ public class ResidentialProperty extends RentableProperty {
     private final int housesCost;
     private final int hotelsCost;
 
-    private boolean hasColorSet;
     private int housesAmount;
     private int hotelsAmount;
 
-    @Override
     public int getRentCost() {
         if (hotelsAmount == 1) {
             return rentWithHotel;
@@ -53,11 +50,41 @@ public class ResidentialProperty extends RentableProperty {
             return rentWith2House;
         } else if (housesAmount == 1) {
             return rentWith1House;
-        } else if (hasColorSet == true) {
+        } else if (checkIfOwnerHasColorSet()) {
             return rentWithColorSet;
         } else {
             return rent;
         }
+
+    }
+
+
+    private boolean checkIfOwnerHasColorSet() {
+        int propertiesWithSameColor = 0;
+
+        for (RentableProperty property : owner.getProperties()) {
+            if (property.getFieldType().equals(FieldType.PROPERTY)) {
+                ResidentialProperty residentialProperty = (ResidentialProperty) property;
+
+                if (residentialProperty.getColor().equals(this.color)) {
+                    propertiesWithSameColor++;
+                }
+            }
+        }
+
+
+        switch (this.color) {
+            case FieldColor.BROWN, FieldColor.DARK_BLUE -> {
+                return propertiesWithSameColor == 2;
+            }
+            case FieldColor.LIGHT_BLUE, FieldColor.PINK, FieldColor.ORANGE, FieldColor.RED, FieldColor.YELLOW, FieldColor.GREEN -> {
+                return propertiesWithSameColor == 3;
+            }
+            default -> {
+                return false;
+            }
+        }
+
 
     }
 }
