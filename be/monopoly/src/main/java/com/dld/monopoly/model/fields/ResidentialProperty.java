@@ -20,6 +20,7 @@ public class ResidentialProperty extends RentableProperty {
         this.rentWithColorSet = rentWithColorSet;
         this.hotelsCost = hotelsCost;
 
+        this.hasColorSet = false;
         this.housesAmount = 0;
         this.hotelsAmount = 0;
     }
@@ -35,11 +36,28 @@ public class ResidentialProperty extends RentableProperty {
 
     private final int housesCost;
     private final int hotelsCost;
+
+    private boolean hasColorSet;
     private int housesAmount;
     private int hotelsAmount;
 
     @Override
     public int getRentCost() {
-        return 0;//TODO
+        if (hotelsAmount == 1) {
+            return rentWithHotel;
+        } else if (housesAmount == 4) {
+            return rentWith4House;
+        } else if (housesAmount == 3) {
+            return rentWith3House;
+        } else if (housesAmount == 2) {
+            return rentWith2House;
+        } else if (housesAmount == 1) {
+            return rentWith1House;
+        } else if (hasColorSet == true) {
+            return rentWithColorSet;
+        } else {
+            return rent;
+        }
+
     }
 }

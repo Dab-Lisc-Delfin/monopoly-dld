@@ -38,4 +38,15 @@ class TransactionServiceImplTest {
         assertEquals(1, player.getProperties().size());
         assertEquals(player, field.getOwner());
     }
+
+
+    @Test
+    void payOwnerOfTheProperty_buyResidentialProperty() {
+        Player player1 = new Player();
+        Player player2 = new Player();
+
+
+
+
+    }
 }
