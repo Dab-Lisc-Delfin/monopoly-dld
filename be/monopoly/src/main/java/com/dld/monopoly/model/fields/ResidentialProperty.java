@@ -41,7 +41,6 @@ public class ResidentialProperty extends RentableProperty {
     private int housesAmount;
     private int hotelsAmount;
 
-    @Override
     public int getRentCost() {
         if (hotelsAmount == 1) {
             return rentWithHotel;
