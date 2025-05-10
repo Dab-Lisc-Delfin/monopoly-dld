@@ -40,7 +40,7 @@ public class GameManager {
             }
         }
 
-        return null; //todo throw error that game not exist
+        throw new IllegalArgumentException(String.format("Game with ID %s doesn't exist.", gameId));
     }
 
     public List<Game> getActiveGames() {

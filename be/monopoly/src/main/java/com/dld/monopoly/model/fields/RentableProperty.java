@@ -14,6 +14,15 @@ public class RentableProperty extends Field {
         this.isAvailable = true;
     }
 
+
+    public int getRentCost(int dicesAmount) {
+        return -1;
+    }
+
+    public int getRentCost() {
+        return -1;
+    }
+
     protected Player owner;
     protected final int price;
     protected boolean isAvailable;
