@@ -10,7 +10,6 @@ public class UtilityProperty extends RentableProperty {
         super(id, name, FieldType.UTILITY, 150);
     }
 
-
     public int getRentCost(int dicesAmount) {
 
         if (dicesAmount < 3 || dicesAmount > 11) {

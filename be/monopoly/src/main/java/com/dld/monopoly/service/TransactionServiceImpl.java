@@ -2,8 +2,7 @@ package com.dld.monopoly.service;
 
 import com.dld.monopoly.model.Game;
 import com.dld.monopoly.model.Player;
-import com.dld.monopoly.model.fields.Field;
-import com.dld.monopoly.model.fields.RentableProperty;
+import com.dld.monopoly.model.fields.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -47,7 +46,36 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     public void payOwnerOfTheProperty(Player owner, Player playerWhoPays) {
-        //todo
+        FieldType fieldType = playerWhoPays.getCurrentPosition().getFieldType();
+
+        switch (fieldType) {
+            case FieldType.PROPERTY -> {
+                ResidentialProperty residentialProperty = (ResidentialProperty) owner.getCurrentPosition();
+                int rentCosts = residentialProperty.getRentCost();
+
+                transferMoney(owner, playerWhoPays, rentCosts);
+            }
+            case FieldType.RAILROADS -> {
+                RailroadProperty railroadProperty = (RailroadProperty) owner.getCurrentPosition();
+                int rentCosts = railroadProperty.getRentCost();
+
+                transferMoney(owner, playerWhoPays, rentCosts);
+            }
+            case FieldType.UTILITY -> {
+                UtilityProperty utilityProperty = (UtilityProperty) owner.getCurrentPosition();
+                int rentCosts = utilityProperty.getRentCost();
+
+                transferMoney(owner, playerWhoPays, rentCosts);
+            }
+        }
+
+    }
+
+
+    private void transferMoney(Player playerThatGetMoney, Player playerWhoSendMoney, int moneyAmount) {
+        playerThatGetMoney.setMoney(playerThatGetMoney.getMoney() + moneyAmount);
+        playerWhoSendMoney.setMoney(playerWhoSendMoney.getMoney() - moneyAmount);
+
     }
 
 

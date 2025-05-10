@@ -20,7 +20,10 @@ public class GameServiceImpl implements GameService {
         Game game = gameManager.getGameById(gameId);
         Player player = new Player();
 
-        //todo check game status (if game is started can't add a new player)
+        if (game.isStarted()) {
+            throw new IllegalStateException("Can't add a new Player. Game has already started.");
+        }
+
         if (game.getPlayers().size() < 6) {
             player.setPlayerIndex(game.getPlayers().size() + 1);
             player.setNickname(playerNick);

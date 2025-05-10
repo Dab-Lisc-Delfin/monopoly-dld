@@ -12,6 +12,7 @@ public class Game {
         this.gameId = gameId;
         this.board = board;
         this.currentPlayer = null;
+        isStarted = false;
     }
 
     private final String gameId;
@@ -20,5 +21,6 @@ public class Game {
     private Player currentPlayer;
     private List<Card> chanceCards;
     private List<Card> communityChestCards;
+    private boolean isStarted;
 
 }
