@@ -20,6 +20,7 @@ public class Player {
         this.isInJail = false;
         this.properties = new ArrayList<>();
         this.afterRoll = false;
+        this.position = null;
     }
 
     private String nickname;
@@ -32,5 +33,6 @@ public class Player {
     private boolean isInJail;
     private List<RentableProperty> properties;
     private boolean afterRoll;
+    private Field currentPosition;
 
 }
