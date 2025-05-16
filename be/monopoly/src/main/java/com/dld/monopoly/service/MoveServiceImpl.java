@@ -107,8 +107,7 @@ public class MoveServiceImpl implements MoveService {
                     ifWaterWorksHasOwnerPayHim(player);
                 }
             }
-            case FieldType.FREE_PARKING -> moveToProperty(player, field);
-            case FieldType.JAIL -> moveToProperty(player, field);
+            case FieldType.FREE_PARKING, FieldType.JAIL -> moveToProperty(player, field);
             case FieldType.GO_TO_JAIL -> sendToJail(game, player);
         }
     }
