@@ -7,6 +7,6 @@ public interface TransactionService {
 
     void buyProperty(Game game, Player player);
 
-    void payOwnerOfTheProperty(Player owner, Player playerWhoPays);
+    void payPropertyOwner(Player owner, Player playerWhoPays);
 
 }

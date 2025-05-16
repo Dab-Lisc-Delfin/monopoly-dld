@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class ResidentialProperty extends RentableProperty {
 
-    public ResidentialProperty(int id, String name, FieldColor color, int price, int rent, int rentWithColorSet, int rentWith1House, int rentWith2House, int rentWith3House, int rentWith4House, int rentWithHotel, int housesCost, int hotelsCost) {
+    public ResidentialProperty(int id, String name, FieldColor color, int price, int rent, int rentWithColorSet, int rentWith1House, int rentWith2House, int rentWith3House, int rentWith4House, int rentWithHotel, int housesCost, int hotelCost) {
         super(id, name, FieldType.PROPERTY, price);
         this.rent = rent;
         this.color = color;
@@ -18,7 +18,7 @@ public class ResidentialProperty extends RentableProperty {
         this.rentWith4House = rentWith4House;
         this.rentWithHotel = rentWithHotel;
         this.rentWithColorSet = rentWithColorSet;
-        this.hotelsCost = hotelsCost;
+        this.hotelCost = hotelCost;
 
         this.housesAmount = 0;
         this.hotelsAmount = 0;
@@ -34,7 +34,7 @@ public class ResidentialProperty extends RentableProperty {
     private final int rentWithHotel;
 
     private final int housesCost;
-    private final int hotelsCost;
+    private final int hotelCost;
 
     private int housesAmount;
     private int hotelsAmount;

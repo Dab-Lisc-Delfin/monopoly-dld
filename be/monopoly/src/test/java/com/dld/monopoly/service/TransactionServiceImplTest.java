@@ -3,9 +3,13 @@ package com.dld.monopoly.service;
 import com.dld.monopoly.model.Game;
 import com.dld.monopoly.model.GameManager;
 import com.dld.monopoly.model.Player;
+import com.dld.monopoly.model.fields.FieldColor;
 import com.dld.monopoly.model.fields.RentableProperty;
+import com.dld.monopoly.model.fields.ResidentialProperty;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -41,10 +45,135 @@ class TransactionServiceImplTest {
 
 
     @Test
-    void payOwnerOfTheProperty_buyResidentialProperty() {
+    void payPropertyOwner_buyResidentialProperty_when1Hotel() {
         Player player1 = new Player();
         Player player2 = new Player();
+        player1.setMoney(1000);
+        player2.setMoney(1000);
 
-        //todo
+        ResidentialProperty residentialProperty = new ResidentialProperty(2, "testProperty", FieldColor.BROWN, 100, 50, 100, 200, 300, 400, 500, 1000, 100, 100);
+
+        player2.setCurrentPosition(residentialProperty);
+        residentialProperty.setHotelsAmount(1);
+        residentialProperty.setOwner(player1);
+
+        transactionServiceImpl.payPropertyOwner(player1, player2);
+        assertEquals(2000, player1.getMoney());
+        assertEquals(0, player2.getMoney());
+    }
+
+
+    @Test
+    void payPropertyOwner_buyResidentialProperty_when4Houses() {
+        Player player1 = new Player();
+        Player player2 = new Player();
+        player1.setMoney(1000);
+        player2.setMoney(1000);
+
+        ResidentialProperty residentialProperty = new ResidentialProperty(2, "testProperty", FieldColor.BROWN, 100, 50, 100, 200, 300, 400, 500, 1000, 100, 100);
+
+        player2.setCurrentPosition(residentialProperty);
+        residentialProperty.setHousesAmount(4);
+        residentialProperty.setOwner(player1);
+
+        transactionServiceImpl.payPropertyOwner(player1, player2);
+        assertEquals(1500, player1.getMoney());
+        assertEquals(500, player2.getMoney());
+    }
+
+
+    @Test
+    void payPropertyOwnery_buyResidentialProperty_when3Houses() {
+        Player player1 = new Player();
+        Player player2 = new Player();
+        player1.setMoney(1000);
+        player2.setMoney(1000);
+
+        ResidentialProperty residentialProperty = new ResidentialProperty(2, "testProperty", FieldColor.BROWN, 100, 50, 100, 200, 300, 400, 500, 1000, 100, 100);
+
+        player2.setCurrentPosition(residentialProperty);
+        residentialProperty.setHousesAmount(3);
+        residentialProperty.setOwner(player1);
+
+        transactionServiceImpl.payPropertyOwner(player1, player2);
+        assertEquals(1400, player1.getMoney());
+        assertEquals(600, player2.getMoney());
+    }
+
+
+    @Test
+    void payPropertyOwner_buyResidentialProperty_when2Houses() {
+        Player player1 = new Player();
+        Player player2 = new Player();
+        player1.setMoney(1000);
+        player2.setMoney(1000);
+
+        ResidentialProperty residentialProperty = new ResidentialProperty(2, "testProperty", FieldColor.BROWN, 100, 50, 100, 200, 300, 400, 500, 1000, 100, 100);
+
+        player2.setCurrentPosition(residentialProperty);
+        residentialProperty.setHousesAmount(2);
+        residentialProperty.setOwner(player1);
+
+        transactionServiceImpl.payPropertyOwner(player1, player2);
+        assertEquals(1300, player1.getMoney());
+        assertEquals(700, player2.getMoney());
+    }
+
+
+    @Test
+    void payPropertyOwner_buyResidentialProperty_when1House() {
+        Player player1 = new Player();
+        Player player2 = new Player();
+        player1.setMoney(1000);
+        player2.setMoney(1000);
+
+        ResidentialProperty residentialProperty = new ResidentialProperty(2, "testProperty", FieldColor.BROWN, 100, 50, 100, 200, 300, 400, 500, 1000, 100, 100);
+
+        player2.setCurrentPosition(residentialProperty);
+        residentialProperty.setHousesAmount(1);
+        residentialProperty.setOwner(player1);
+
+        transactionServiceImpl.payPropertyOwner(player1, player2);
+        assertEquals(1200, player1.getMoney());
+        assertEquals(800, player2.getMoney());
+    }
+
+
+    @Test
+    void payPropertyOwner_buyResidentialProperty_whenColorSet() {
+        Player player1 = new Player();
+        Player player2 = new Player();
+        player1.setMoney(1000);
+        player2.setMoney(1000);
+
+
+        ResidentialProperty residentialProperty1 = new ResidentialProperty(2, "testProperty", FieldColor.BROWN, 100, 50, 100, 200, 300, 400, 500, 1000, 100, 100);
+        ResidentialProperty residentialProperty2 = new ResidentialProperty(3, "testProperty2", FieldColor.BROWN, 100, 50, 100, 200, 300, 400, 500, 1000, 100, 100);
+        residentialProperty1.setOwner(player1);
+
+        player1.setProperties(List.of(residentialProperty1, residentialProperty2));
+        player2.setCurrentPosition(residentialProperty1);
+
+        transactionServiceImpl.payPropertyOwner(player1, player2);
+        assertEquals(1100, player1.getMoney());
+        assertEquals(900, player2.getMoney());
+    }
+
+
+    @Test
+    void payPropertyOwner_buyResidentialProperty_whenJustOwnProperty() {
+        Player player1 = new Player();
+        Player player2 = new Player();
+        player1.setMoney(1000);
+        player2.setMoney(1000);
+
+
+        ResidentialProperty residentialProperty1 = new ResidentialProperty(2, "testProperty", FieldColor.BROWN, 100, 50, 100, 200, 300, 400, 500, 1000, 100, 100);
+        residentialProperty1.setOwner(player1);
+        player2.setCurrentPosition(residentialProperty1);
+
+        transactionServiceImpl.payPropertyOwner(player1, player2);
+        assertEquals(1050, player1.getMoney());
+        assertEquals(950, player2.getMoney());
     }
 }
