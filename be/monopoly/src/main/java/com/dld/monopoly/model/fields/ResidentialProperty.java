@@ -7,35 +7,34 @@ import lombok.Setter;
 @Setter
 public class ResidentialProperty extends RentableProperty {
 
-//    public ResidentialProperty(int id, String name, FieldColor color, int price, int rent, int rentWithColorSet, int rentWith1House, int rentWith2House, int rentWith3House, int rentWith4House, int rentWithHotel, int housesCost, int hotelCost) {
-    public ResidentialProperty() {
-//        super(id, name, FieldType.PROPERTY, price);
-//        this.rent = rent;
-//        this.color = color;
-//        this.housesCost = housesCost;
-//        this.rentWith1House = rentWith1House;
-//        this.rentWith2House = rentWith2House;
-//        this.rentWith3House = rentWith3House;
-//        this.rentWith4House = rentWith4House;
-//        this.rentWithHotel = rentWithHotel;
-//        this.rentWithColorSet = rentWithColorSet;
-//        this.hotelCost = hotelCost;
-//        super.setFieldType(FieldType.PROPERTY); //<- todo 
+    public ResidentialProperty(int id, String name, FieldColor color, int price, int rent, int rentWithColorSet, int rentWith1House, int rentWith2House, int rentWith3House, int rentWith4House, int rentWithHotel, int housesCost, int hotelCost) {
+        super(id, name, FieldType.PROPERTY, price);
+        this.rent = rent;
+        this.color = color;
+        this.housesCost = housesCost;
+        this.rentWith1House = rentWith1House;
+        this.rentWith2House = rentWith2House;
+        this.rentWith3House = rentWith3House;
+        this.rentWith4House = rentWith4House;
+        this.rentWithHotel = rentWithHotel;
+        this.rentWithColorSet = rentWithColorSet;
+        this.hotelCost = hotelCost;
+
         this.housesAmount = 0;
         this.hotelsAmount = 0;
     }
 
-    private  FieldColor color;
-    private  int rent;
-    private  int rentWithColorSet;
-    private  int rentWith1House;
-    private  int rentWith2House;
-    private  int rentWith3House;
-    private  int rentWith4House;
-    private  int rentWithHotel;
+    private final FieldColor color;
+    private final int rent;
+    private final int rentWithColorSet;
+    private final int rentWith1House;
+    private final int rentWith2House;
+    private final int rentWith3House;
+    private final int rentWith4House;
+    private final int rentWithHotel;
 
-    private  int housesCost;
-    private  int hotelCost;
+    private final int housesCost;
+    private final int hotelCost;
 
     private int housesAmount;
     private int hotelsAmount;

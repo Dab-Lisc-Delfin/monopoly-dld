@@ -1,18 +1,20 @@
 package com.dld.monopoly.model.fields.builder;
 
+import com.dld.monopoly.model.fields.FieldColor;
+import com.dld.monopoly.model.fields.ResidentialProperty;
+
 public interface Builder {
-    void reset();
+    Builder setId(int id);
 
-    void setId();
+    Builder setName(String name);
 
-    void setName();
+    Builder setPrice(int price);
 
+    Builder setFieldColor(FieldColor color);
 
-    void setPrice();
+    Builder setRentPrices(int rent, int rentWithColorSet, int rentWith1House, int rentWith2House, int rentWith3House, int rentWith4House, int rentWithHotel);
 
-    void setFieldColor();
+    Builder setBuildingPrices(int housesCost, int hotelCost);
 
-    void setRentPrices(int rent, int rentWithColorSet, int rentWith1House, int rentWith2House, int rentWith3House, int rentWith4House, int rentWithHotel);
-
-    void setBuildingPrices(int housesCost, int hotelCost);
+    ResidentialProperty createObject();
 }
