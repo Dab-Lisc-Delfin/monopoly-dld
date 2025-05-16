@@ -45,24 +45,24 @@ public class TransactionServiceImpl implements TransactionService {
         }
     }
 
-    public void payOwnerOfTheProperty(Player owner, Player playerWhoPays) {
+    public void payPropertyOwner(Player owner, Player playerWhoPays) {
         FieldType fieldType = playerWhoPays.getCurrentPosition().getFieldType();
 
         switch (fieldType) {
             case FieldType.PROPERTY -> {
-                ResidentialProperty residentialProperty = (ResidentialProperty) owner.getCurrentPosition();
+                ResidentialProperty residentialProperty = (ResidentialProperty) playerWhoPays.getCurrentPosition();
                 int rentCosts = residentialProperty.getRentCost();
 
                 transferMoney(owner, playerWhoPays, rentCosts);
             }
             case FieldType.RAILROADS -> {
-                RailroadProperty railroadProperty = (RailroadProperty) owner.getCurrentPosition();
+                RailroadProperty railroadProperty = (RailroadProperty) playerWhoPays.getCurrentPosition();
                 int rentCosts = railroadProperty.getRentCost();
 
                 transferMoney(owner, playerWhoPays, rentCosts);
             }
             case FieldType.UTILITY -> {
-                UtilityProperty utilityProperty = (UtilityProperty) owner.getCurrentPosition();
+                UtilityProperty utilityProperty = (UtilityProperty) playerWhoPays.getCurrentPosition();
                 int rentCosts = utilityProperty.getRentCost();
 
                 transferMoney(owner, playerWhoPays, rentCosts);
