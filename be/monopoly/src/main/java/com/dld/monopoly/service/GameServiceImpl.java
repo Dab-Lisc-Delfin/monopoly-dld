@@ -2,6 +2,7 @@ package com.dld.monopoly.service;
 
 import com.dld.monopoly.model.*;
 import com.dld.monopoly.model.fields.*;
+import com.dld.monopoly.model.fields.builder.ResidentalPropertyBuilder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -95,10 +96,24 @@ public class GameServiceImpl implements GameService {
 
     protected Board initializeBoard() {
         List<Field> boardField = new ArrayList<>();
+        ResidentalPropertyBuilder builder = new ResidentalPropertyBuilder();
 
         boardField.add(new Field(1, "START", FieldType.START));
 
-        boardField.add(new ResidentialProperty(2, "MEDITERRANEAN AVENUE", FieldColor.BROWN, 60, 2, 4, 10, 30, 90, 160, 250, 50, 50));
+//        boardField.add(new ResidentialProperty(2, "MEDITERRANEAN AVENUE", FieldColor.BROWN, 60, 2, 4, 10, 30, 90, 160, 250, 50, 50));
+
+        boardField.add(
+                builder
+                        .setId(2)
+                        .setName("MEDITERRANEAN AVENUE")
+                        .setFieldColor(FieldColor.BROWN)
+                        .setPrice(60)
+                        .setRentPrices(2, 4, 10, 30, 90, 160, 250)
+                        .setBuildingPrices(50, 50)
+                        .createObject()
+        );
+
+
         boardField.add(new Field(3, "COMMUNITY CHEST", FieldType.COMMUNITY_CHEST));
         boardField.add(new ResidentialProperty(4, "BALTIC AVENUE", FieldColor.BROWN, 60, 4, 8, 20, 60, 180, 320, 450, 50, 50));
         boardField.add(new Field(5, "INCOME TAX", FieldType.TAX));
