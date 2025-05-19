@@ -1,24 +1,28 @@
 package com.dld.monopoly.service;
 
 import com.dld.monopoly.model.Card;
+import com.dld.monopoly.model.Game;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
-public class CardServiceImpl implements CardService{
+public class CardServiceImpl implements CardService {
 
-    public Card getChanceCard() {
-        return null;
+    public Card getCardFromDeck(List<Card> chanceCards) {
+
+        Card topCard = chanceCards.get(chanceCards.size() - 1);
+
+        //move each card
+        for (int i = 1; i < chanceCards.size(); i++) {
+            chanceCards.set(i, chanceCards.get(i - 1));
+        }
+
+        chanceCards.set(0, topCard);
+        return topCard;
     }
 
     @Override
-    public Card getCommunityChestCard() {
-        return null;
-    }
-
-    @Override
-    public List<Card> shuffleDeck() {
-        return null;
+    public void shuffleDeck(List<Card> deck) {
+        Collections.shuffle(deck);
     }
 
     @Override
