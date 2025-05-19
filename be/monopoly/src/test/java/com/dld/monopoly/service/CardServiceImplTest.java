@@ -65,18 +65,32 @@ class CardServiceImplTest {
         log.info("Deck after shuffle {} {} {} {} {}", testDeck.get(0).getName(), testDeck.get(1).getName(), testDeck.get(2).getName(), testDeck.get(3).getName(), testDeck.get(4).getName());
     }
 
+
     @Test
     void useCard() {
         //todo
     }
 
+
     @Test
     void initializeChanceCards() {
-        //todo
+        List<Card> chanceCards = cardService.initializeChanceCards();
+
+        assertEquals("Advance to Boardwalk", chanceCards.get(0).getName());
+        assertEquals("Get Out of Jail Free.", chanceCards.get(8).getName());
+        assertEquals("Your building loan matures. Collect $150", chanceCards.get(chanceCards.size()-1).getName());
+
+        assertTrue(chanceCards.size() == 16);
     }
 
     @Test
     void initializeCommunityChestCards() {
-        //todo
+        List<Card> communityChestCards = cardService.initializeCommunityChestCards();
+
+        assertEquals("Advance to Go (Collect $200)", communityChestCards.get(0).getName());
+        assertEquals("It is your birthday. Collect $10 from every player", communityChestCards.get(8).getName());
+        assertEquals("You inherit $100", communityChestCards.get(communityChestCards.size()-1).getName());
+
+        assertTrue(communityChestCards.size() == 16);
     }
 }
