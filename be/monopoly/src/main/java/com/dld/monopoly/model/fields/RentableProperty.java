@@ -7,21 +7,12 @@ import lombok.Setter;
 @Getter
 @Setter
 public class RentableProperty extends Field {
-
-
-    protected RentableProperty(int id, String name, FieldType fieldType,int price) { //todo keep price?
+    protected RentableProperty(int id, String name, FieldType fieldType, int price) { //todo keep price?
         super(id, name, fieldType);
         this.owner = null;
         this.price = price;
         this.isAvailable = true;
     }
-
-    protected RentableProperty(int id, String name, FieldType fieldType) {
-        super(id, name, fieldType);
-        this.owner = null;
-        this.isAvailable = true;
-    }
-
 
     public int getRentCost(int dicesAmount) {
         return -1;
