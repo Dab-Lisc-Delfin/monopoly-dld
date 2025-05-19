@@ -19,9 +19,9 @@ class CardServiceImplTest {
 
 
     @Test
-    void getChanceCard() {
+    void getCardFromDeck_whenGivenChanceCards() {
         List<Card> chanceCards = cardService.initializeChanceCards();
-        Card card = cardService.getChanceCard(chanceCards);
+        Card card = cardService.getCardFromDeck(chanceCards);
 
         //get first card from the top
         assertEquals("Your building loan matures. Collect $150", card.getName());
@@ -33,9 +33,18 @@ class CardServiceImplTest {
 
 
     @Test
-    void getCommunityChestCard() {
-        //todo
+    void getCardFromDeck_whenGivenCommunityChestCards() {
+        List<Card> communityCards = cardService.initializeCommunityChestCards();
+        Card card = cardService.getCardFromDeck(communityCards);
+
+        //get first card from the top
+        assertEquals("You inherit $100", card.getName());
+
+        //check if that card went to the end of the deck
+        assertEquals("You inherit $100", communityCards.get(0).getName());
+        assertNotEquals("You inherit $100", communityCards.get(communityCards.size() - 1).getName());
     }
+
 
     @Test
     void shuffleDeck() {

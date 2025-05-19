@@ -10,9 +10,8 @@ public interface CardService {
 
     List<Card> initializeCommunityChestCards();
 
-    Card getChanceCard(List<Card> chanceCards);
+    Card getCardFromDeck(List<Card> deck);
 
-    Card getCommunityChestCard();
 
     List<Card> shuffleDeck();
 

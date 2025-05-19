@@ -7,9 +7,9 @@ import java.util.List;
 
 public class CardServiceImpl implements CardService {
 
-    public Card getChanceCard(List<Card> chanceCards) {
+    public Card getCardFromDeck(List<Card> chanceCards) {
 
-        Card topCard = chanceCards.get(chanceCards.size()-1);
+        Card topCard = chanceCards.get(chanceCards.size() - 1);
 
         //move each card
         for (int i = 1; i < chanceCards.size(); i++) {
@@ -18,11 +18,6 @@ public class CardServiceImpl implements CardService {
 
         chanceCards.set(0, topCard);
         return topCard;
-    }
-
-    @Override
-    public Card getCommunityChestCard() {
-        return null;
     }
 
     @Override
