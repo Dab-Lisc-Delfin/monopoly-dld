@@ -1,13 +1,16 @@
 package com.dld.monopoly.service;
 
 import com.dld.monopoly.model.Card;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@Slf4j
 class CardServiceImplTest {
 
     private static CardService cardService;
@@ -48,8 +51,18 @@ class CardServiceImplTest {
 
     @Test
     void shuffleDeck() {
-        //todo
+        List<Card> testDeck = new ArrayList<>();
+        testDeck.add(new Card("1"));
+        testDeck.add(new Card("2"));
+        testDeck.add(new Card("3"));
+        testDeck.add(new Card("4"));
+        testDeck.add(new Card("5"));
 
+        log.info("Deck before shuffle: {} {} {} {} {}", testDeck.get(0).getName(), testDeck.get(1).getName(), testDeck.get(2).getName(), testDeck.get(3).getName(), testDeck.get(4).getName());
+
+        cardService.shuffleDeck(testDeck);
+
+        log.info("Deck after shuffle {} {} {} {} {}", testDeck.get(0).getName(), testDeck.get(1).getName(), testDeck.get(2).getName(), testDeck.get(3).getName(), testDeck.get(4).getName());
     }
 
     @Test

@@ -2,8 +2,7 @@ package com.dld.monopoly.service;
 
 import com.dld.monopoly.model.Card;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class CardServiceImpl implements CardService {
 
@@ -21,8 +20,8 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
-    public List<Card> shuffleDeck() {
-        return null;
+    public void shuffleDeck(List<Card> deck) {
+        Collections.shuffle(deck);
     }
 
     @Override

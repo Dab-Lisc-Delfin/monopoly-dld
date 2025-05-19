@@ -12,8 +12,7 @@ public interface CardService {
 
     Card getCardFromDeck(List<Card> deck);
 
-
-    List<Card> shuffleDeck();
+    void shuffleDeck(List<Card> deck);
 
     void useCard(Card card);
 
