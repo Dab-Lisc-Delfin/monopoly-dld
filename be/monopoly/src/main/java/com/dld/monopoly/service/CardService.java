@@ -10,7 +10,7 @@ public interface CardService {
 
     List<Card> initializeCommunityChestCards();
 
-    Card getChanceCard();
+    Card getChanceCard(List<Card> chanceCards);
 
     Card getCommunityChestCard();
 
