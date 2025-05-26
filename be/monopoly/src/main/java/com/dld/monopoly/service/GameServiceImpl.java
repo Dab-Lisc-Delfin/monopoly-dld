@@ -93,7 +93,7 @@ public class GameServiceImpl implements GameService {
         }
     }
 
-
+//todo
     protected Board initializeBoard() {
         List<Field> boardField = new ArrayList<>();
         ResidentalPropertyBuilder builder = new ResidentalPropertyBuilder();

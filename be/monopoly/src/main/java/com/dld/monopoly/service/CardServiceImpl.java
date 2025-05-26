@@ -2,6 +2,7 @@ package com.dld.monopoly.service;
 
 import com.dld.monopoly.model.Card;
 import com.dld.monopoly.model.Game;
+import com.dld.monopoly.model.Player;
 
 import java.util.*;
 
@@ -26,7 +27,7 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
-    public void useCard(Card card) {
+    public void useCard(Player player, Card card) {
 
     }
 
@@ -39,12 +40,12 @@ public class CardServiceImpl implements CardService {
         chanceCards.add(new Card("Advance to St. Charles Place. If you pass Go, collect $200"));
         chanceCards.add(new Card("Advance to the nearest Railroad. If unowned, you may buy it from the Bank. If owned, pay wonder twice the rental to which they are otherwise entitled"));
         chanceCards.add(new Card("Advance to the nearest Railroad. If unowned, you may buy it from the Bank. If owned, pay wonder twice the rental to which they are otherwise entitled"));
-        chanceCards.add(new Card("Advance token to nearest Utility. If unowned, you may buy it from the Bank. If owned, throw dice and pay owner a total ten times amount thrown."));
+        chanceCards.add(new Card("Advance token to nearest Utility. If unowned, you may buy it from the Bank. If owned, throw dice and pay owner a total ten times amount thrown.")); //TODO
         chanceCards.add(new Card("Bank pays you dividend of $50."));
-        chanceCards.add(new Card("Get Out of Jail Free."));
+        chanceCards.add(new Card("Get Out of Jail Free.")); //TODO
         chanceCards.add(new Card("Go Back 3 Spaces."));
         chanceCards.add(new Card("Go to Jail. Go directly to Jail, do not pass Go, do not collect $200."));
-        chanceCards.add(new Card(" Make general repairs on all your property. For each house pay $25. For each hotel pay $100."));
+        chanceCards.add(new Card("Make general repairs on all your property. For each house pay $25. For each hotel pay $100."));
         chanceCards.add(new Card("Speeding fine $15."));
         chanceCards.add(new Card("Take a trip to Reading Railroad. If you pass Go, collect $200."));
         chanceCards.add(new Card("You have been elected Chairman of the Board. Pay each player $50."));
