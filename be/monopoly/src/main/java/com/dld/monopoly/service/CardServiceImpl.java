@@ -2,6 +2,7 @@ package com.dld.monopoly.service;
 
 import com.dld.monopoly.model.Card;
 import com.dld.monopoly.model.Game;
+import com.dld.monopoly.model.Player;
 
 import java.util.*;
 
@@ -26,7 +27,7 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
-    public void useCard(Card card) {
+    public void useCard(Player player, Card card) {
 
     }
 

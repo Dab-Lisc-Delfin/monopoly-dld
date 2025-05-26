@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class RentableProperty extends Field {
-    protected RentableProperty(int id, String name, FieldType fieldType, int price) { //todo keep price?
+    protected RentableProperty(int id, String name, FieldType fieldType, int price) {
         super(id, name, fieldType);
         this.owner = null;
         this.price = price;
