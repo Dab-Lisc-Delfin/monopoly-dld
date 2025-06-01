@@ -83,7 +83,7 @@ class CardServiceImplTest {
         ResidentalPropertyBuilder propertyBuilder = new ResidentalPropertyBuilder();
         Player testPlayer = gameService.addPlayerToGame(game.getGameId(), "testPlayer");
         Player testPlayer2 = gameService.addPlayerToGame(game.getGameId(), "testPlayer2");
-        testPlayer.setCurrentPosition(gameService.findFieldById(game, 3));
+        testPlayer.setCurrentPosition(gameService.findFieldById(game, 8));
         gameService.addPlayerToGame(game.getGameId(), "additionalPlayer1");
         gameService.addPlayerToGame(game.getGameId(), "additionalPlayer2");
 
