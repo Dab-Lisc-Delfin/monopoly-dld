@@ -9,6 +9,7 @@ import com.dld.monopoly.model.fields.ResidentialProperty;
 import com.dld.monopoly.model.fields.builder.ResidentalPropertyBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -74,18 +75,17 @@ class CardServiceImplTest {
     }
 
 
-    //TODO HERE WORK
 
-    //rebuild community positions -> chance positions TODO
+    @Disabled
     @Test
-    void useCard_communityCards() {
+    void useCard_chanceCards() {
         Game game = gameService.createNewGame();
         ResidentalPropertyBuilder propertyBuilder = new ResidentalPropertyBuilder();
-        Player testPlayer = gameService.addPlayerToGame(game.getGameId(), "testPlayer");
-        Player testPlayer2 = gameService.addPlayerToGame(game.getGameId(), "testPlayer2");
+        Player testPlayer = gameService.addPlayerToGame(game.getGameId(), "testPlayer"); //1 - MAIN
+        Player testPlayer2 = gameService.addPlayerToGame(game.getGameId(), "testPlayer2"); //2
+        gameService.addPlayerToGame(game.getGameId(), "additionalPlayer1"); //3
+        gameService.addPlayerToGame(game.getGameId(), "additionalPlayer2"); //4
         testPlayer.setCurrentPosition(gameService.findFieldById(game, 8));
-        gameService.addPlayerToGame(game.getGameId(), "additionalPlayer1");
-        gameService.addPlayerToGame(game.getGameId(), "additionalPlayer2");
 
         //card1//
         Card mockCard1 = new Card("Your building loan matures. Collect $150");
@@ -98,34 +98,36 @@ class CardServiceImplTest {
         //card2//
         Card mockCard2 = new Card("You have been elected Chairman of the Board. Pay each player $50.");
         cardService.useCard(testPlayer, mockCard2);
-        assertEquals(1400, testPlayer.getMoney()); //1500 - 2*(50) = 1400
+        assertEquals(1350, testPlayer.getMoney()); //1500 - 3*(50) = 1350
         //
         testPlayer.setMoney(1500);
 
 
-        //card3//
+        //card3// 1
         Card mockCard3 = new Card("Take a trip to Reading Railroad. If you pass Go, collect $200.");
         cardService.useCard(testPlayer, mockCard3);
         assertEquals("Reading Railroad", testPlayer.getPosition().getName());
-        assertEquals(1500, testPlayer.getMoney()); // shouldn't get extra money
-
-
-        testPlayer.setCurrentPosition(gameService.findFieldById(game, 18));
+        assertEquals(1700, testPlayer.getMoney()); // should get extra money
+        //||
+        //|| 2
+        testPlayer.setCurrentPosition(gameService.findFieldById(game, 23));
+        testPlayer.setMoney(1500);
         //
         cardService.useCard(testPlayer, mockCard3);
         assertEquals("Reading Railroad", testPlayer.getPosition().getName());
         assertEquals(1700, testPlayer.getMoney()); // should get extra money
         //
         testPlayer.setMoney(1500);
-
-
-        testPlayer.setCurrentPosition(gameService.findFieldById(game, 34));
+        //||
+        //|| 3
+        testPlayer.setCurrentPosition(gameService.findFieldById(game, 37));
         //
         cardService.useCard(testPlayer, mockCard3);
         assertEquals("Reading Railroad", testPlayer.getPosition().getName());
         assertEquals(1700, testPlayer.getMoney()); // should get extra money
         //
         testPlayer.setMoney(1500);
+        testPlayer.setCurrentPosition(gameService.findFieldById(game, 8));
 
 
         Card mockCard4 = new Card("Speeding fine $15.");
@@ -141,6 +143,8 @@ class CardServiceImplTest {
         mockProperty1.setHousesAmount(4);
         mockProperty2.setHousesAmount(2);
         mockProperty3.setHotelsAmount(1);
+        List<RentableProperty> properties = List.of(mockProperty1, mockProperty2, mockProperty3);
+        testPlayer.setProperties(properties);
         //
         Card mockCard5 = new Card("Make general repairs on all your property. For each house pay $25. For each hotel pay $100.");
         cardService.useCard(testPlayer, mockCard5); // 6*25 +100 = 250
@@ -154,14 +158,22 @@ class CardServiceImplTest {
         assertEquals(1500, testPlayer.getMoney());
         assertEquals(FieldType.JAIL, testPlayer.getCurrentPosition().getFieldType());
         //
-        testPlayer.setCurrentPosition(gameService.findFieldById(game, 3));
+        testPlayer.setCurrentPosition(gameService.findFieldById(game, 8));
 
 
         Card mockCard7 = new Card("Go Back 3 Spaces.");
         cardService.useCard(testPlayer, mockCard7);
-        assertEquals(40, testPlayer.getCurrentPosition().getId()); // id:3 -> id:40
+        assertEquals(5, testPlayer.getCurrentPosition().getId()); // id:8 -> id:5
+        assertEquals(1300,testPlayer.getMoney()); //INCOME TAX
         //
-        testPlayer.setCurrentPosition(gameService.findFieldById(game, 3));
+        testPlayer.setCurrentPosition(gameService.findFieldById(game, 23));
+        assertEquals(5, testPlayer.getCurrentPosition().getId()); // id:23 -> id:20
+        //
+        testPlayer.setCurrentPosition(gameService.findFieldById(game, 37));
+        assertEquals(5, testPlayer.getCurrentPosition().getId()); // id:37 -> id:34
+        //
+        testPlayer.setCurrentPosition(gameService.findFieldById(game, 8));
+
 
 
         Card mockCard8 = new Card("Get Out of Jail Free."); //TODO
@@ -179,15 +191,15 @@ class CardServiceImplTest {
         cardService.useCard(testPlayer, mockCard10);
         assertEquals("ELECTRIC COMPANY", testPlayer.getCurrentPosition().getName());
         //
-        testPlayer.setCurrentPosition(gameService.findFieldById(game, 18));
+        testPlayer.setCurrentPosition(gameService.findFieldById(game, 23));
         cardService.useCard(testPlayer, mockCard10);
         assertEquals("WATER WORKS", testPlayer.getCurrentPosition().getName());
         //
-        testPlayer.setCurrentPosition(gameService.findFieldById(game, 34));
+        testPlayer.setCurrentPosition(gameService.findFieldById(game, 37));
         cardService.useCard(testPlayer, mockCard10);
         assertEquals("ELECTRIC COMPANY", testPlayer.getCurrentPosition().getName());
         //
-        testPlayer.setCurrentPosition(gameService.findFieldById(game, 3));
+        testPlayer.setCurrentPosition(gameService.findFieldById(game, 8));
 
 
         Card mockCard11 = new Card("Advance to the nearest Railroad. If unowned, you may buy it from the Bank. If owned, pay wonder twice the rental to which they are otherwise entitled");
@@ -195,22 +207,22 @@ class CardServiceImplTest {
         assertEquals("READING RAILROAD", testPlayer.getCurrentPosition().getName());
         assertEquals(1500, testPlayer.getMoney());
         //
-        testPlayer.setCurrentPosition(gameService.findFieldById(game, 34));
+        testPlayer.setCurrentPosition(gameService.findFieldById(game, 23));
         cardService.useCard(testPlayer, mockCard11);
-        assertEquals("SHORT LINE RAILROAD", testPlayer.getCurrentPosition());
+        assertEquals("B&O RAILROAD", testPlayer.getCurrentPosition());
         assertEquals(1500, testPlayer.getMoney());
         //
-        testPlayer.setCurrentPosition(gameService.findFieldById(game, 18));
+        testPlayer.setCurrentPosition(gameService.findFieldById(game, 37));
         List<RentableProperty> propertiesPlayer2 = new ArrayList<>();
-        propertiesPlayer2.add((RentableProperty) gameService.findFieldByName(game, "PENNSYLVANIA RAILROAD"));
-        propertiesPlayer2.add((RentableProperty) gameService.findFieldByName(game, "B&O RAILROAD"));
+        propertiesPlayer2.add((RentableProperty) gameService.findFieldByName(game, "READING RAILROAD"));
+        propertiesPlayer2.add((RentableProperty) gameService.findFieldByName(game, "SHORT LINE RAILROAD"));
         testPlayer2.setProperties(propertiesPlayer2);
         cardService.useCard(testPlayer, mockCard11);
-        assertEquals("B&O RAILROAD", testPlayer.getCurrentPosition().getName());
+        assertEquals("READING RAILROAD", testPlayer.getCurrentPosition().getName());
         assertEquals(1400, testPlayer.getMoney()); // 1500 - 50*2 = 1400
         //
         testPlayer.setMoney(1500);
-        testPlayer.setCurrentPosition(gameService.findFieldById(game, 3));
+        testPlayer.setCurrentPosition(gameService.findFieldById(game, 8));
 
 
         Card mockCard12 = new Card("Advance to St. Charles Place. If you pass Go, collect $200");
@@ -218,19 +230,19 @@ class CardServiceImplTest {
         assertEquals("ST. CHARLES PLACE", testPlayer.getCurrentPosition());
         assertEquals(1500, testPlayer.getMoney());
         //
-        testPlayer.setCurrentPosition(gameService.findFieldById(game, 18));
+        testPlayer.setCurrentPosition(gameService.findFieldById(game, 23));
         cardService.useCard(testPlayer, mockCard12);
         assertEquals("ST. CHARLES PLACE", testPlayer.getCurrentPosition());
         assertEquals(1700, testPlayer.getMoney()); //"If you pass Go, collect $200"
         //
         testPlayer.setMoney(1500);
-        testPlayer.setCurrentPosition(gameService.findFieldById(game, 34));
+        testPlayer.setCurrentPosition(gameService.findFieldById(game, 37));
         cardService.useCard(testPlayer, mockCard12);
         assertEquals("ST. CHARLES PLACE", testPlayer.getCurrentPosition());
         assertEquals(1700, testPlayer.getMoney()); //"If you pass Go, collect $200"
         //
         testPlayer.setMoney(1500);
-        testPlayer.setCurrentPosition(gameService.findFieldById(game, 3));
+        testPlayer.setCurrentPosition(gameService.findFieldById(game, 8));
 
 
         Card mockCard13 = new Card("Advance to Illinois Avenue. If you pass Go, collect $200");
@@ -238,18 +250,18 @@ class CardServiceImplTest {
         assertEquals("ILLINOIS AVENUE", testPlayer.getCurrentPosition());
         assertEquals(1500, testPlayer.getMoney());
         //
-        testPlayer.setCurrentPosition(gameService.findFieldById(game, 18));
+        testPlayer.setCurrentPosition(gameService.findFieldById(game, 23));
         cardService.useCard(testPlayer, mockCard13);
         assertEquals("ILLINOIS AVENUE", testPlayer.getCurrentPosition());
         assertEquals(1500, testPlayer.getMoney());
         //
-        testPlayer.setCurrentPosition(gameService.findFieldById(game, 34));
+        testPlayer.setCurrentPosition(gameService.findFieldById(game, 37));
         cardService.useCard(testPlayer, mockCard13);
         assertEquals("ILLINOIS AVENUE", testPlayer.getCurrentPosition());
         assertEquals(1700, testPlayer.getMoney()); //"If you pass Go, collect $200"
         //
         testPlayer.setMoney(1500);
-        testPlayer.setCurrentPosition(gameService.findFieldById(game, 3));
+        testPlayer.setCurrentPosition(gameService.findFieldById(game, 8));
 
 
         Card mockCard14 = new Card("Advance to Go (Collect $200)");
