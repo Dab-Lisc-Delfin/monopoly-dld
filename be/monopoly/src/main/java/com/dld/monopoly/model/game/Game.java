@@ -1,5 +1,8 @@
 package com.dld.monopoly.model;
 
+import com.dld.monopoly.model.Board;
+import com.dld.monopoly.model.Card;
+import com.dld.monopoly.model.Player;
 import lombok.Getter;
 import lombok.Setter;
 

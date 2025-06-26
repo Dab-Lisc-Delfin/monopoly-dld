@@ -1,4 +1,4 @@
-package com.dld.monopoly.service;
+package com.dld.monopoly.service.card;
 
 import com.dld.monopoly.model.Card;
 import com.dld.monopoly.model.Player;

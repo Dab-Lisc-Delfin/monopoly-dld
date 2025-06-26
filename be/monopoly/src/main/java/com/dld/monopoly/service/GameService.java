@@ -1,7 +1,7 @@
-package com.dld.monopoly.service;
+package com.dld.monopoly.service.game;
 
 import com.dld.monopoly.model.Card;
-import com.dld.monopoly.model.Game;
+import com.dld.monopoly.model.game.Game;
 import com.dld.monopoly.model.Player;
 import com.dld.monopoly.model.fields.Field;
 
@@ -16,5 +16,7 @@ public interface GameService {
     Field findFieldByName(Game game, String fieldName);
 
     List<Card> shuffleCards(List<Card> cards);
+
+    Game createNewGame();
 
 }

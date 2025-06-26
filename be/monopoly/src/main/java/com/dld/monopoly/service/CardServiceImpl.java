@@ -1,8 +1,8 @@
-package com.dld.monopoly.service;
+package com.dld.monopoly.service.card;
 
 import com.dld.monopoly.model.Card;
-import com.dld.monopoly.model.Game;
 import com.dld.monopoly.model.Player;
+import com.dld.monopoly.service.card.CardService;
 
 import java.util.*;
 
@@ -28,6 +28,13 @@ public class CardServiceImpl implements CardService {
 
     @Override
     public void useCard(Player player, Card card) {
+
+        switch (card.getName()) {
+            case "Your building loan matures. Collect $150" -> {
+                
+            }
+        }
+
 
     }
 
