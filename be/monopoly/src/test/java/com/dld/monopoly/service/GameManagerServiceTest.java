@@ -1,7 +1,7 @@
 package com.dld.monopoly.service;
 
-import com.dld.monopoly.model.Game;
-import com.dld.monopoly.model.GameManager;
+import com.dld.monopoly.model.game.Game;
+import com.dld.monopoly.model.game.GameManager;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

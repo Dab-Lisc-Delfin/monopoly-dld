@@ -1,11 +1,10 @@
-package com.dld.monopoly.service.game;
+package com.dld.monopoly.service;
 
 import com.dld.monopoly.model.*;
 import com.dld.monopoly.model.fields.Field;
 import com.dld.monopoly.model.fields.FieldType;
 import com.dld.monopoly.model.game.Game;
 import com.dld.monopoly.model.game.GameManager;
-import com.dld.monopoly.service.game.GameServiceImpl;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

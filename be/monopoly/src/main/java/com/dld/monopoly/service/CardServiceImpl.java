@@ -1,8 +1,7 @@
-package com.dld.monopoly.service.card;
+package com.dld.monopoly.service;
 
 import com.dld.monopoly.model.Card;
 import com.dld.monopoly.model.Player;
-import com.dld.monopoly.service.card.CardService;
 
 import java.util.*;
 
