@@ -1,5 +1,7 @@
 package com.dld.monopoly.model;
 
+import com.dld.monopoly.model.game.Game;
+import com.dld.monopoly.model.game.GameManager;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

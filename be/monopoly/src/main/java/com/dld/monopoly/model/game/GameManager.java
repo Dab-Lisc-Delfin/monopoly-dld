@@ -1,4 +1,4 @@
-package com.dld.monopoly.model;
+package com.dld.monopoly.model.game;
 
 import lombok.Getter;
 

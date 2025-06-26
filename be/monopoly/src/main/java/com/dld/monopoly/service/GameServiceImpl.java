@@ -3,6 +3,8 @@ package com.dld.monopoly.service;
 import com.dld.monopoly.model.*;
 import com.dld.monopoly.model.fields.*;
 import com.dld.monopoly.model.fields.builder.ResidentalPropertyBuilder;
+import com.dld.monopoly.model.game.Game;
+import com.dld.monopoly.model.game.GameManager;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
