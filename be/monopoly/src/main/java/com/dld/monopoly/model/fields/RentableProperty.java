@@ -9,7 +9,7 @@ import lombok.Setter;
 public class RentableProperty extends Field {
     protected RentableProperty(int id, String name, FieldType fieldType, int price) {
         super(id, name, fieldType);
-        this.owner = null;
+        this.ownerId = 0;
         this.price = price;
         this.isAvailable = true;
     }
@@ -22,7 +22,7 @@ public class RentableProperty extends Field {
         return -1;
     }
 
-    protected Player owner;
+    protected int ownerId;
     protected int price;
     protected boolean isAvailable;
 

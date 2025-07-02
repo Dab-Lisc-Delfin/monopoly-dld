@@ -10,33 +10,33 @@ public class UtilityProperty extends RentableProperty {
         super(id, name, FieldType.UTILITY, 150);
     }
 
-    public int getRentCost(int dicesAmount) {
+//    public int getRentCost(int dicesAmount) {
+//
+//        if (dicesAmount < 3 || dicesAmount > 11) {
+//            throw new IllegalArgumentException("Incorrect dices amount. " + dicesAmount);
+//        }
+//
+//        if (checkIfOwnerHasBothUtilities()) {
+//            return dicesAmount * 10;
+//        } else {
+//            return dicesAmount * 4;
+//        }
+//    }
 
-        if (dicesAmount < 3 || dicesAmount > 11) {
-            throw new IllegalArgumentException("Incorrect dices amount. " + dicesAmount);
-        }
 
-        if (checkIfOwnerHasBothUtilities()) {
-            return dicesAmount * 10;
-        } else {
-            return dicesAmount * 4;
-        }
-    }
-
-
-    private boolean checkIfOwnerHasBothUtilities() {
-        int ownedUtilityProperties = 0;
-
-        for (Field property : owner.getProperties()) {
-            if (property.getFieldType().equals(FieldType.UTILITY)) {
-                ownedUtilityProperties++;
-            }
-        }
-
-        if (ownedUtilityProperties == 2) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+//    private boolean checkIfOwnerHasBothUtilities() {
+//        int ownedUtilityProperties = 0;
+//
+//        for (Field property : owner.getProperties()) { //todo findPlayerById
+//            if (property.getFieldType().equals(FieldType.UTILITY)) {
+//                ownedUtilityProperties++;
+//            }
+//        }
+//
+//        if (ownedUtilityProperties == 2) {
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
 }

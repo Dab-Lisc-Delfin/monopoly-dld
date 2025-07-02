@@ -23,6 +23,7 @@ public class Player {
         this.position = null;
     }
 
+    private int id; //todo implement in service
     private String nickname;
     private int[] dices;
     private int money;

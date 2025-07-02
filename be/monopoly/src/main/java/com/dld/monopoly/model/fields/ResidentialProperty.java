@@ -39,52 +39,52 @@ public class ResidentialProperty extends RentableProperty {
     private int housesAmount;
     private int hotelsAmount;
 
-    public int getRentCost() {
-        if (hotelsAmount == 1) {
-            return rentWithHotel;
-        } else if (housesAmount == 4) {
-            return rentWith4House;
-        } else if (housesAmount == 3) {
-            return rentWith3House;
-        } else if (housesAmount == 2) {
-            return rentWith2House;
-        } else if (housesAmount == 1) {
-            return rentWith1House;
-        } else if (checkIfOwnerHasColorSet()) {
-            return rentWithColorSet;
-        } else {
-            return rent;
-        }
-
-    }
-
-
-    private boolean checkIfOwnerHasColorSet() {
-        int propertiesWithSameColor = 0;
-
-        for (RentableProperty property : owner.getProperties()) {
-            if (property.getFieldType().equals(FieldType.PROPERTY)) {
-                ResidentialProperty residentialProperty = (ResidentialProperty) property;
-
-                if (residentialProperty.getColor().equals(this.color)) {
-                    propertiesWithSameColor++;
-                }
-            }
-        }
+//    public int getRentCost() {
+//        if (hotelsAmount == 1) {
+//            return rentWithHotel;
+//        } else if (housesAmount == 4) {
+//            return rentWith4House;
+//        } else if (housesAmount == 3) {
+//            return rentWith3House;
+//        } else if (housesAmount == 2) {
+//            return rentWith2House;
+//        } else if (housesAmount == 1) {
+//            return rentWith1House;
+//        } else if (checkIfOwnerHasColorSet()) {
+//            return rentWithColorSet;
+//        } else {
+//            return rent;
+//        }
+//
+//    }
 
 
-        switch (this.color) {
-            case FieldColor.BROWN, FieldColor.DARK_BLUE -> {
-                return propertiesWithSameColor == 2;
-            }
-            case FieldColor.LIGHT_BLUE, FieldColor.PINK, FieldColor.ORANGE, FieldColor.RED, FieldColor.YELLOW, FieldColor.GREEN -> {
-                return propertiesWithSameColor == 3;
-            }
-            default -> {
-                return false;
-            }
-        }
+//    private boolean checkIfOwnerHasColorSet() {
+//        int propertiesWithSameColor = 0;
+//
+//        for (RentableProperty property : owner.getProperties()) { //todo findPlayerById
+//            if (property.getFieldType().equals(FieldType.PROPERTY)) {
+//                ResidentialProperty residentialProperty = (ResidentialProperty) property;
+//
+//                if (residentialProperty.getColor().equals(this.color)) {
+//                    propertiesWithSameColor++;
+//                }
+//            }
+//        }
+
+//
+//        switch (this.color) {
+//            case FieldColor.BROWN, FieldColor.DARK_BLUE -> {
+//                return propertiesWithSameColor == 2;
+//            }
+//            case FieldColor.LIGHT_BLUE, FieldColor.PINK, FieldColor.ORANGE, FieldColor.RED, FieldColor.YELLOW, FieldColor.GREEN -> {
+//                return propertiesWithSameColor == 3;
+//            }
+//            default -> {
+//                return false;
+//            }
+//        }
 
 
-    }
+//    }
 }

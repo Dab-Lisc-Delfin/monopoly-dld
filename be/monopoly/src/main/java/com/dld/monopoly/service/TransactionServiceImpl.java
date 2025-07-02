@@ -25,7 +25,7 @@ public class TransactionServiceImpl implements TransactionService {
                     if (field instanceof RentableProperty)
 
                         if (checkIfPlayerHasEnoughMoneyToBuyProperty(player, field)) {
-                            field.setOwner(player);
+                            field.setOwnerId(player.getId());
                             field.setAvailable(false);
                             payForProperty(player, field);
                             addPropertyToPlayer(player, field);
@@ -81,7 +81,7 @@ public class TransactionServiceImpl implements TransactionService {
         if (!(field instanceof RentableProperty)) {
             return false;
         } else {
-            if (((RentableProperty) field).getOwner() == null) {
+            if (((RentableProperty) field).getOwnerId() == 0) {
                 return true;
             }
         }
@@ -91,7 +91,7 @@ public class TransactionServiceImpl implements TransactionService {
 
     private void addPropertyToPlayer(Player player, RentableProperty rentableProperty) {
         player.getProperties().add(rentableProperty);
-        rentableProperty.setOwner(player);
+        rentableProperty.setOwnerId(player.getId());
     }
 
 
