@@ -6,6 +6,7 @@ import com.dld.monopoly.model.Player;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -15,7 +16,8 @@ public class Game {
         this.gameId = gameId;
         this.board = board;
         this.currentPlayer = null;
-        isStarted = false;
+        this.players = new ArrayList<>();
+        this.isStarted = false;
     }
 
     private final String gameId;

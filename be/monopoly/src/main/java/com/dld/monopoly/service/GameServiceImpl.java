@@ -46,7 +46,6 @@ public class GameServiceImpl implements GameService {
     public Game createNewGame() {
         String randomId = UUID.randomUUID().toString().substring(0, 5);
         Game game = new Game(randomId, initializeBoard());
-        game.setPlayers(new ArrayList<>());
         System.out.println("GAMEEE ID " + game.getGameId());
         return game;
     }

@@ -14,15 +14,15 @@ public class GameController {
         this.gameService = gameService;
     }
 
-    @PostMapping
+    @PostMapping("/v1/create-game")
     public ResponseEntity<Game> createGame() {
         return ResponseEntity.ok(gameService.createNewGame());
     }
 
-    @PostMapping
-    public ResponseEntity<Game> getGameStatement(String gameId) {
-
-        return null;
-    }
+//    @PostMapping
+//    public ResponseEntity<Game> getGameStatement(String gameId) {
+//
+//        return ResponseEntity.ok(null);
+//    }
 
 }
