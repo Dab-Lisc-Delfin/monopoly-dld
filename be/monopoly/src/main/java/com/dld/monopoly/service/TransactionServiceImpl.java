@@ -25,7 +25,7 @@ public class TransactionServiceImpl implements TransactionService {
                     if (field instanceof RentableProperty)
 
                         if (checkIfPlayerHasEnoughMoneyToBuyProperty(player, field)) {
-                            field.setOwnerId(player.getId());
+                            field.setOwner(player);
                             field.setAvailable(false);
                             payForProperty(player, field);
                             addPropertyToPlayer(player, field);
@@ -44,23 +44,23 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     public void payPropertyOwner(Player owner, Player playerWhoPays) {
-        FieldType fieldType = playerWhoPays.getCurrentPosition().getFieldType();
+        FieldType fieldType = playerWhoPays.getPosition().getFieldType();
 
         switch (fieldType) {
             case FieldType.PROPERTY -> {
-                ResidentialProperty residentialProperty = (ResidentialProperty) playerWhoPays.getCurrentPosition();
+                ResidentialProperty residentialProperty = (ResidentialProperty) playerWhoPays.getPosition();
                 int rentCosts = residentialProperty.getRentCost();
 
                 transferMoney(owner, playerWhoPays, rentCosts);
             }
             case FieldType.RAILROADS -> {
-                RailroadProperty railroadProperty = (RailroadProperty) playerWhoPays.getCurrentPosition();
+                RailroadProperty railroadProperty = (RailroadProperty) playerWhoPays.getPosition();
                 int rentCosts = railroadProperty.getRentCost();
 
                 transferMoney(owner, playerWhoPays, rentCosts);
             }
             case FieldType.UTILITY -> {
-                UtilityProperty utilityProperty = (UtilityProperty) playerWhoPays.getCurrentPosition();
+                UtilityProperty utilityProperty = (UtilityProperty) playerWhoPays.getPosition();
                 int rentCosts = utilityProperty.getRentCost();
 
                 transferMoney(owner, playerWhoPays, rentCosts);
@@ -81,7 +81,7 @@ public class TransactionServiceImpl implements TransactionService {
         if (!(field instanceof RentableProperty)) {
             return false;
         } else {
-            if (((RentableProperty) field).getOwnerId() == 0) {
+            if (((RentableProperty) field).getOwner() == null) {
                 return true;
             }
         }
@@ -91,7 +91,7 @@ public class TransactionServiceImpl implements TransactionService {
 
     private void addPropertyToPlayer(Player player, RentableProperty rentableProperty) {
         player.getProperties().add(rentableProperty);
-        rentableProperty.setOwnerId(player.getId());
+        rentableProperty.setOwner(player);
     }
 
 

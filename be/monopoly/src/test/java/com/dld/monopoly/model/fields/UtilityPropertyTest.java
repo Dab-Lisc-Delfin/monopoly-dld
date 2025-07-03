@@ -16,7 +16,7 @@ class UtilityPropertyTest {
         this.mockUtilityProperty = new UtilityProperty(1, "testUtilityProperty");
         this.player = new Player();
 
-        mockUtilityProperty.setOwner(player);
+//        mockUtilityProperty.setOwner(player);
         player.getProperties().add(mockUtilityProperty);
     }
 
