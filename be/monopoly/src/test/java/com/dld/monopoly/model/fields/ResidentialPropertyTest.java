@@ -17,7 +17,7 @@ class ResidentialPropertyTest {
         mockProperty = new ResidentialProperty(1, "testProperty", FieldColor.LIGHT_BLUE, 100, 50, 100, 150, 200, 300, 400, 500, 100, 200);
         player = new Player();
 
-        mockProperty.setOwner(player);
+//        mockProperty.setOwner(player);
         player.getProperties().add(mockProperty);
     }
 
@@ -60,7 +60,7 @@ class ResidentialPropertyTest {
         ResidentialProperty mockProperty10 = new ResidentialProperty(10, "testProperty", FieldColor.BROWN, 100, 50, 100, 150, 200, 300, 400, 500, 100, 200);
         ResidentialProperty mockProperty11 = new ResidentialProperty(11, "testProperty", FieldColor.BROWN, 100, 50, 100, 150, 200, 300, 400, 500, 100, 200);
 
-        mockProperty10.setOwner(player);
+//        mockProperty10.setOwner(player);
         player.getProperties().add(mockProperty10);
         player.getProperties().add(mockProperty11);
 

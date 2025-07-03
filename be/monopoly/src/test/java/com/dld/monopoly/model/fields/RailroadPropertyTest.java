@@ -16,7 +16,7 @@ class RailroadPropertyTest {
 
         Player testPlayer = new Player();
 
-        mockRailroadProperty1.setOwner(testPlayer);
+//        mockRailroadProperty1.setOwner(testPlayer);
 
         testPlayer.getProperties().add(mockRailroadProperty1);
         assertEquals(25, mockRailroadProperty1.getRentCost());

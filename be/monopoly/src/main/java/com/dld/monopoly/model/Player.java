@@ -2,6 +2,9 @@ package com.dld.monopoly.model;
 
 import com.dld.monopoly.model.fields.Field;
 import com.dld.monopoly.model.fields.RentableProperty;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,6 +13,10 @@ import java.util.List;
 
 @Getter
 @Setter
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id"
+)
 public class Player {
 
     public Player() {
@@ -34,6 +41,4 @@ public class Player {
     private boolean isInJail;
     private List<RentableProperty> properties;
     private boolean afterRoll;
-    private Field currentPosition;
-
 }
